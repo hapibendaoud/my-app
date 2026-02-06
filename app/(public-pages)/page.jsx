@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import {AnimatedBackground} from "@/"
+
 
 
 
@@ -53,15 +53,6 @@ export default function Home() {
         <h1 className="autoShow w-full h-50 flex justify-center items-center text-4xl text-gray-700 underline decoration-gray-400">A Better Care Experience</h1>
         
         <div className="w-full h-fit grid grid-cols-3 gap-15">
-          <AnimatedBackground
-        className='rounded-lg bg-zinc-100 dark:bg-zinc-800'
-        transition={{
-          type: 'spring',
-          bounce: 0.2,
-          duration: 0.6,
-        }}
-        enableHover
-      >
           <div className="h-65 border-t border-b border-gray-400 px-2.5 py-10">
             <h2 className="autoShow pb-5 text-xl text-gray-700">Why Choose Us</h2>
             <p className="autoShow text-gray-500">Trusted healthcare delivered by experienced professionals, 
@@ -82,7 +73,6 @@ export default function Home() {
                 and ongoing support to help you manage your health with confidence.
             </p>
           </div>
-          </AnimatedBackground>
         </div>
       </div>
       {/* ***************  End ***************** */}
