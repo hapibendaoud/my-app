@@ -1,10 +1,58 @@
 import Link from "next/link";
 import Image from "next/image";
-
+import { AnimatedBackground } from "@/components/motion-primitives/animated-background";
 
 
 
 export default function Home() {
+    const ITEMS = [
+        {
+          id: 1,
+          title: 'Why Choose Us',
+          description: 'Trusted healthcare delivered by experienced professionals, combining medical expertise with personalized and modern care.',
+        },
+        {
+          id: 2,
+          title: 'Secure Care',
+          description: 'Your medical data is handled with the highest level of confidentiality and protected through secure systems that comply with strict privacy standards, ensuring your personal and health information remains safe at all times.',
+        },
+        {
+          id: 3,
+          title: 'Follow-Up',
+          description: 'We ensure continuous follow-up after your visit, providing clear medical guidance, personalized recommendations, and ongoing support to help you manage your health with confidence.',
+        },
+    ]
+
+    const Patients = [
+      {
+        id: 1,
+        name: "Said Bendaoud",
+        city: "Agadir",
+        comment:"I had a great experience at MedCare Clinic. The staff was very professional, friendly, and attentive. Highly recommended!",
+        rate:"⭐⭐⭐⭐"
+      },
+      {
+        id: 2,
+        name: "Hicham Bimosa",
+        city: "Casa",
+        comment:"MedCare Clinic offers excellent service with a clean environment and well-organized appointments. Thank you for the outstanding care.",
+        rate:"⭐⭐⭐⭐"
+      },
+      {
+        id: 3,
+        name: "Mohmmad Elyakoubi",
+        city: "Rabat",
+        comment:"I truly appreciate the professionalism and kindness of the medical team at MedCare. They made me feel comfortable and well taken care of.",
+        rate:"⭐⭐⭐⭐"
+      },
+      {
+        id: 4,
+        name: "Soufian Benzidan",
+        city: "Taroudant",
+        comment:"Very satisfied with the service at MedCare Clinic. The doctors are skilled, and the reception team is welcoming and helpful.",
+        rate:"⭐⭐⭐⭐"
+      },
+    ]
   return (
     <>
           {/* The main Title and Information */}
@@ -30,17 +78,17 @@ export default function Home() {
              {/* The second suction and links */}
       <div className="relative w-full h-18 border-b border-gray-400 ">
         <div className="w-full h-15 grid grid-cols-3 gap-30 px-25 absolute bottom-8">
-          <Link href="/Opening" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 cursor-pointer">
+          <Link href="/Opening" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 cursor-pointer hover:bg-blue-200 hover:border-blue-800">
             <Image src="/Opening.png" alt="Icone" width={20} height={20} className=""></Image>
             <span className="pl-4 text-2xl text-gray-700">Opening Hours</span>
           </Link>
 
-          <Link href="/Services" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 cursor-pointer">
+          <Link href="/Services" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 cursor-pointer hover:bg-green-200 hover:border-green-800">
             <Image src="/Services.png" alt="Icone" width={20} height={20} className=""></Image>
             <span className="pl-4 text-2xl text-gray-700">Our Services</span>
           </Link>
 
-          <Link href="/Location" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 z-10 cursor-pointer">
+          <Link href="/Location" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 z-10 cursor-pointer hover:bg-blue-200 hover:border-blue-800">
             <Image src="/about.png" alt="Icone" width={20} height={20} className=""></Image>
             <span className="pl-4 text-2xl text-gray-700">Visit Our Location</span>
           </Link>
@@ -53,26 +101,24 @@ export default function Home() {
         <h1 className="autoShow w-full h-50 flex justify-center items-center text-4xl text-gray-700 underline decoration-gray-400">A Better Care Experience</h1>
         
         <div className="w-full h-fit grid grid-cols-3 gap-15">
-          <div className="h-65 border-t border-b border-gray-400 px-2.5 py-10">
-            <h2 className="autoShow pb-5 text-xl text-gray-700">Why Choose Us</h2>
-            <p className="autoShow text-gray-500">Trusted healthcare delivered by experienced professionals, 
-              combining medical expertise with personalized and modern care.
+          <AnimatedBackground
+            className='rounded-lg bg-gray-200 dark:bg-zinc-800'
+            transition={{
+              type: 'spring',
+              bounce: 0.2,
+              duration: 0.6,
+            }}
+            enableHover
+          >
+
+        {ITEMS.map((item, index) => (
+          <div key={index} data-id={`card-${index}`} className="h-65 border-t border-b border-gray-400 px-2.5 py-10">
+            <h2 className="autoShow pb-5 text-xl text-gray-700">{item.title}</h2>
+            <p className="autoShow text-gray-500">{item.description}
             </p>
           </div>
-          <div className=" h-65 border-t border-b border-gray-400 px-2.5 py-10">
-            <h2 className="autoShow pb-5 text-xl text-gray-700">Secure Care</h2>
-            <p className="autoShow text-gray-500">Your medical data is handled with the highest level of confidentiality 
-              and protected through secure systems that comply with strict privacy standards, ensuring your personal 
-              and health information remains safe at all times.
-            </p>
-          </div>
-          <div className="h-65   border-t border-b border-gray-400 px-2.5 py-10 ">
-            <h2 className="autoShow pb-5 text-xl text-gray-700">Follow-Up</h2>
-            <p className="autoShow text-gray-500">We ensure continuous follow-up after your visit,
-                providing clear medical guidance, personalized recommendations, 
-                and ongoing support to help you manage your health with confidence.
-            </p>
-          </div>
+          ))}
+          </AnimatedBackground>
         </div>
       </div>
       {/* ***************  End ***************** */}
@@ -128,24 +174,32 @@ export default function Home() {
       {/* ***************  End ************** */}
 
 
-      <div className="w-full h-100 flex flex-col">
+      <div className="w-full h-fit pb-15 flex flex-col">
         <div className="w-full h-fit py-10 px-17 flex flex-wrap items-center justify-between text-5xl text-gray-700 font-bold ">
           <h2 className="text-blue-600 font-bold">What Our <span className="text-green-600 font-bold">Patients</span> Says</h2>
           <Image src="/comment.png" alt="Icone" width={40} height={40} className=""></Image>
         </div>
         
-        <div className="w-full h-fit grid grid-cols-3 gap-7">
-          <div className="">
-            <Image src="/Patient.jpeg" alt="Patient" width={50} height={50}></Image>
-            <div>
-              <p>Said Bendaoud</p>
-              <span>Agadir</span>
+        <div className="w-full  grid grid-cols-4 gap-15 px-17 cursor-pointer">
+          {Patients.map((Patient, index) => (
+            <div key={index} className="w-full h-fit flex flex-wrap items-center  px-4 py-3 rounded-lg  bg-gray-300 hover:bg-gray-200">
+              <Image src="/Patient.jpeg" alt="Patient" width={50} height={40} className="rounded-full bg-amber-50"></Image>
+              <div className="w-fit  h-fit pl-4">
+                  <p className="text-base text-gray-800">{Patient.name}</p>
+                  <span className="text-sm text-gray-800">from {Patient.city}</span>
+              </div>
+              <div className="w-full h-fit py-2.5">
+                <p className="text-sm text-gray-600 pb-3.5">{Patient.comment}</p>
+                <span className="">{Patient.rate}</span>
+              </div>
             </div>
-          </div>
+        ))}
+          
+
         </div>
       </div>
 
-      <footer className="w-full h-200 bg-amber-200">
+      <footer className="w-full ">
 
       </footer>
     </>
