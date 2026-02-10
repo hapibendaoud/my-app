@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import TextBorderAnimation from "@/components/animata/text/text-border-animation";
 
 export default function Navbar(){
 return(
@@ -8,10 +9,10 @@ return(
             <Link href={"/"}><Image src="/logo.png" alt="logo" width={230} height={200}/></Link>
         </div>
         <div className=" flex justify-around gap-8 h-full items-center w-33.33%">
-            <Link href={"/"}><div className="cursor-pointer text-gray-700 py-7">Home</div></Link>
-            <Link href={"/About"}><div className="cursor-pointer text-gray-700 py-7">About</div></Link>
-            <Link href={"/Services"}><div className="cursor-pointer text-gray-700 py-7">Services</div></Link>
-            <Link href={"/Contact"}><div className="cursor-pointer text-gray-700 py-7">Contact</div></Link>
+            <Link href={"/"}><div className="cursor-pointer text-gray-700 py-7"><TextBorderAnimation text="Home" className=""/></div></Link>
+            <Link href={"/About"}><div className="cursor-pointer text-gray-700 py-7"><TextBorderAnimation text="About"/></div></Link>
+            <Link href={"/Services"}><div className="cursor-pointer text-gray-700 py-7"><TextBorderAnimation text="Services"/></div></Link>
+            <Link href={"/Contact"}><div className="cursor-pointer text-gray-700 py-7"><TextBorderAnimation text="Contact"/></div></Link>
         </div>
         <div className="flex gap-2 w-33.33% ">
             <Link href={"/Login"} className="cursor-pointer text-blue-600 border px-8 py-1 rounded-md hover:bg-blue-900 hover:text-white">Login</Link>

@@ -52,6 +52,13 @@ export default function Home() {
         comment:"Very satisfied with the service at MedCare Clinic. The doctors are skilled, and the reception team is welcoming and helpful.",
         rate:"⭐⭐⭐⭐"
       },
+      {
+        id: 4,
+        name: "Soufian Benzidan",
+        city: "Taroudant",
+        comment:"Very satisfied with the service at MedCare Clinic. The doctors are skilled, and the reception team is welcoming and helpful.",
+        rate:"⭐⭐⭐⭐"
+      },
     ]
   return (
     <>
@@ -62,7 +69,7 @@ export default function Home() {
           <div className="">
             <h1 className="text-6xl text-gray-700 font-bold pb-7">Welcome to <span className="text-blue-600">Med</span><span className="text-green-600">Care</span></h1>
             <p className="text-4xl text-gray-700 pb-10">Your Health, Our Priority</p>
-            <Link href={"/BookAppointment"} className="cursor-pointer text-2xl text-white bg-green-600 border-green-600 border px-11 py-2 rounded-md hover:bg-green-700">
+            <Link href={"/Login"} className="cursor-pointer text-2xl text-white bg-green-600 border-green-600 border px-11 py-2 rounded-md hover:bg-green-700">
                 Get Started
             </Link>
           </div>
@@ -180,9 +187,9 @@ export default function Home() {
           <Image src="/comment.png" alt="Icone" width={40} height={40} className=""></Image>
         </div>
         
-        <div className="w-full  grid grid-cols-4 gap-15 px-17 cursor-pointer">
+        <div className="w-full  grid grid-cols-4 gap-15 px-17 ">
           {Patients.map((Patient, index) => (
-            <div key={index} className="w-full h-fit flex flex-wrap items-center  px-4 py-3 rounded-lg  bg-gray-300 hover:bg-gray-200">
+            <div key={index} className="w-full h-fit flex flex-wrap items-center  px-4 py-3 rounded-lg  bg-gray-300 hover:bg-gray-200 cursor-pointer">
               <Image src="/Patient.jpeg" alt="Patient" width={50} height={40} className="rounded-full bg-amber-50"></Image>
               <div className="w-fit  h-fit pl-4">
                   <p className="text-base text-gray-800">{Patient.name}</p>
@@ -199,7 +206,7 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="w-full ">
+      <footer>
 
       </footer>
     </>
