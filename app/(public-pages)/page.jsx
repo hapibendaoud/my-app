@@ -69,7 +69,7 @@ export default function Home() {
           <div className="">
             <h1 className="text-6xl text-gray-700 font-bold pb-7">Welcome to <span className="text-blue-600">Med</span><span className="text-green-600">Care</span></h1>
             <p className="text-4xl text-gray-700 pb-10">Your Health, Our Priority</p>
-            <Link href={"/Login"} className="cursor-pointer text-2xl text-white bg-green-600 border-green-600 border px-11 py-2 rounded-md hover:bg-green-700">
+            <Link href={"/login"} className="cursor-pointer text-2xl text-white bg-green-600 border-green-600 border px-11 py-2 rounded-md hover:bg-green-700">
                 Get Started
             </Link>
           </div>
@@ -85,17 +85,17 @@ export default function Home() {
              {/* The second suction and links */}
       <div className="relative w-full h-18 border-b border-gray-400 ">
         <div className="w-full h-15 grid grid-cols-3 gap-30 px-25 absolute bottom-8">
-          <Link href="/Opening" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 cursor-pointer hover:bg-blue-200 hover:border-blue-800">
+          <Link href="/opening" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 cursor-pointer hover:bg-blue-200 hover:border-blue-800">
             <Image src="/Opening.png" alt="Icone" width={20} height={20} className=""></Image>
             <span className="pl-4 text-2xl text-gray-700">Opening Hours</span>
           </Link>
 
-          <Link href="/Services" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 cursor-pointer hover:bg-green-200 hover:border-green-800">
+          <Link href="/services" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 cursor-pointer hover:bg-green-200 hover:border-green-800">
             <Image src="/Services.png" alt="Icone" width={20} height={20} className=""></Image>
             <span className="pl-4 text-2xl text-gray-700">Our Services</span>
           </Link>
 
-          <Link href="/Location" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 z-10 cursor-pointer hover:bg-blue-200 hover:border-blue-800">
+          <Link href="/location" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 z-10 cursor-pointer hover:bg-blue-200 hover:border-blue-800">
             <Image src="/about.png" alt="Icone" width={20} height={20} className=""></Image>
             <span className="pl-4 text-2xl text-gray-700">Visit Our Location</span>
           </Link>
@@ -207,7 +207,33 @@ export default function Home() {
       </div>
 
       <footer>
-
+        <div className="w-full h-fit grid grid-cols-2 gap-2.5 px-17 pb-5 border-t border-gray-300">
+                <div className="py-10">
+                    <h1
+                    className="text-4xl font-bold text-blue-600 py-4"
+                    >
+                    Be a Part of our <span className="text-green-600">Family</span></h1>
+                    <Link href={"/login"} 
+                    className="cursor-pointer text-lg text-white bg-green-600 border-green-600 border px-11 py-2 rounded-md hover:bg-green-700 "
+                    >
+                    Get Started
+                    </Link>
+                </div>
+                <div className="flex flex-wrap items-center justify-around py-10 ">
+                    <Link href={"https://www.facebook.com/said.ait.bendaoud.2025"} target="_blank" className="flex flex-wrap items-center gap-3">
+                        <Image src="/facebook.png" alt="facebook" width={30} height={30}></Image>
+                        <p className="text-blue-700 font-bold text-lg">Faceb<span className="text-green-700">ook</span></p>
+                    </Link>
+                    <Link href={"https://www.instagram.com/hapi_bendaoud"} target="_blank" className="flex flex-wrap items-center gap-3">
+                        <Image src="/instagram.png" alt="facebook" width={30} height={30}></Image>
+                        <p className="text-blue-700 font-bold text-lg">Instag<span className="text-green-700">ram</span></p>
+                    </Link>
+                    <Link href={"https://wa.me/212658259695"} target="_blank" className="flex flex-wrap items-center gap-3">
+                        <Image src="/whatsapp.png" alt="facebook" width={30} height={30}></Image>
+                        <p className="text-blue-700 font-bold text-lg">Whats<span className="text-green-700">app</span></p>
+                    </Link>
+                </div>
+            </div>
       </footer>
     </>
   );
