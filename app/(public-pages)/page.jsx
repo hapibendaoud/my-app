@@ -63,7 +63,7 @@ export default function Home() {
   return (
     <>
           {/* The main Title and Information */}
-      <div className="w-full h-144 bg-login grid grid-cols-2">
+      <div className="w-full h-144 bg-home grid grid-cols-2">
 
         <div className="w-full h-full flex flex-col items-center pt-40">
           <div className="">

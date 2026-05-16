@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 
-export default function RegisterPage() {
+export default function Register() {
   return (
     <section className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white shadow-lg rounded-2xl p-8 w-80 text-center">
