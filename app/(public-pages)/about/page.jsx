@@ -319,7 +319,7 @@ export default function About() {
           <p className="w-full h-fit text-gray-500  indent-8">Click on the Picture</p>
         </div>
       </div>
-      <div classsName="">
+      <div className="">
         <h1 className="text-6xl text-gray-700 font-bold pb-7">Welcome to <span className="text-blue-600">Med</span><span className="text-green-600">Care</span></h1>
       </div>
     </>
