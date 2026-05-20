@@ -96,8 +96,8 @@ export default function About() {
                   className='pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 sm:w-[500px]'
                 >
                   <MorphingDialogImage
-                    src='/photo-1.jpg'
-                    alt='photo 1'
+                    src='/photo-1c.jpg'
+                    alt='photo 1c'
                     className='h-115 w-auto'
                   />
                   <div className='p-6'>
@@ -223,8 +223,8 @@ export default function About() {
                   className='pointer-events-auto relative flex h-fit w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 sm:w-[500px]'
                 >
                   <MorphingDialogImage
-                    src='/photo-3.jpg'
-                    alt='photo 3'
+                    src='/photo-3c.jpg'
+                    alt='photo 3c'
                     className='h-117 w-auto'
                   />
                   <div className='p-6'>
@@ -286,8 +286,8 @@ export default function About() {
                   className='pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 sm:w-[500px]'
                 >
                   <MorphingDialogImage
-                    src='/photo-4.jpg'
-                    alt='photo 4'
+                    src='/photo-4c.jpg'
+                    alt='photo 4c'
                     className='h-115 w-auto'
                   />
                   <div className='p-6'>
@@ -319,8 +319,8 @@ export default function About() {
           <p className="w-full h-fit text-gray-500  indent-8">Click on the Picture</p>
         </div>
       </div>
-      <div className="">
-        <h1 className="text-6xl text-gray-700 font-bold pb-7">Welcome to <span className="text-blue-600">Med</span><span className="text-green-600">Care</span></h1>
+      <div className="px-15">
+        <h1 className="text-6xl text-gray-700 font-bold pb-7"><span className="text-blue-600">Our</span><span className="text-green-600"> Teame</span></h1>
       </div>
     </>
   );

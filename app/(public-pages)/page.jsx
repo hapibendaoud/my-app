@@ -133,23 +133,21 @@ export default function Home() {
       {/* ********** Doctor information  ******************/}
       <div className="grid grid-cols-2 gap-5">
         <div className="flex flex-col pt-20 pl-17 ">
-          <h2 className="autoShow text-3xl py-18 border-t border-gray-300 text-gray-700">Dr. Amin El Hashimi – Chief Surgeon</h2>
-          <p className="autoShow flex flex-col text-1xl">
+          <h2 className="autoShow text-5xl border-t border-gray-300 py-4"><span className="text-blue-600 font-bold">Dr. Amin El Hashimi –</span><span className="text-green-600 font-bold"> Chief Surgeon</span></h2>
+          <p className="autoShow flex flex-col text-2xl">
             <span className="w-full h-fit pb-5 text-gray-500 border-t border-gray-300 pt-15 indent-8 tracking-wide">
-              Dr. Amin El Hashimi is a multidisciplinary surgeon with extensive and distinguished 
-              experience in the surgical field. He graduated from medical school and further advanced his career through 
-              specialized training programs in multiple surgical disciplines, equipping him to manage a wide range of complex 
-              medical cases with the highest level of skill and precision.
+              <b>Dr. Amin El Hashimi</b> is an experienced, multi-specialty surgeon. Thanks to advanced training across multiple 
+              surgical disciplines, he is highly skilled in managing a wide range of complex medical cases with top-tier 
+              precision.
             </span>
             <span className="text-gray-500 pt-2 indent-8 tracking-wide">
-              Dr. Amin is committed to accurate diagnosis and continuous follow-up, placing patient health and safety at 
-              the core of his practice. He also utilizes the latest surgical techniques and methods to ensure optimal treatment 
-              outcomes, while adhering to the highest professional and ethical standards.
+              <b>Dr. Amin</b> prioritizes patient safety and health through accurate diagnosis and continuous follow-up. By combining 
+              ethical standards with the latest surgical techniques, he consistently ensures optimal treatment outcomes.
             </span>
           </p>
         </div>
         <div className="autoShow flex w-full h-200 p-18">
-          <Image className="w-full rounded-4xl" src="/DoctorRespo.jpg" alt="Doctor" width={400} height={400}></Image>
+          <Image className="w-full rounded-4xl" src="/photo-4.jpg" alt="Doctor" width={400} height={400}></Image>
         </div>
       </div>
       {/* ***************  End ************** */}
@@ -161,18 +159,15 @@ export default function Home() {
           <Image className="w-full rounded-4xl" src="/ClinicFace.png" alt="Clinic" width={400} height={400}></Image>
         </div>
         <div className="flex flex-col pt-20 px-17 ">
-          <h2 className="autoShow text-3xl border-t border-gray-300 py-4"><span className="text-blue-600 font-bold">Med</span><span className="text-green-600 font-bold">Care</span></h2>
-          <p className="autoShow flex flex-col text-1xl pt-4 border-t border-gray-300">
+          <h2 className="autoShow text-5xl border-t border-gray-300 py-4"><span className="text-blue-600 font-bold">Med</span><span className="text-green-600 font-bold">Care</span></h2>
+          <p className="autoShow flex flex-col text-2xl pt-4 border-t border-gray-300">
             <span className="w-full h-fit text-gray-500  indent-8">
               <span className="text-blue-600 font-bold">Med</span><span className="text-green-600 font-bold">Care </span> 
-              is a multi-specialty medical clinic designed in accordance with modern healthcare standards 
-              and equipped with advanced medical technology to ensure accurate diagnosis and effective treatment 
-              in a safe and comfortable environment, supervised by a highly qualified and experienced physician who 
-              follows an evidence-based, patient-centered approach emphasizing ethical practice and precise medical 
-              follow-up, and supported by a dedicated nursing team of four certified professionals (two male and two 
-              female nurses) known for their competence, professionalism, and compassionate care, allowing the clinic 
-              to deliver integrated, high-quality healthcare services while maintaining strict standards of hygiene, 
-              safety, and clinical excellence for individuals and families.
+              is a multi-specialty medical clinic that combines modern equipment with medical expertise to deliver integrated, 
+              safe, and high-quality healthcare. The clinic operates under the supervision of a highly qualified physician 
+              utilizing a precise, evidence-based approach, and is supported by a dedicated nursing team of four certified 
+              professionals. Together, they ensure the best medical services for individuals and families in a comfortable 
+              and strictly hygienic environment.
             </span>
           </p>
         </div>
