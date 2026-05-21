@@ -29,35 +29,35 @@ export default function Home() {
         name: "Said Bendaoud",
         city: "Agadir",
         comment:"I had a great experience at MedCare Clinic. The staff was very professional, friendly, and attentive. Highly recommended!",
-        rate:"⭐⭐⭐⭐"
+        rate:"⭐⭐⭐⭐⭐"
       },
       {
         id: 2,
         name: "Hicham Bimosa",
         city: "Casa",
         comment:"MedCare Clinic offers excellent service with a clean environment and well-organized appointments. Thank you for the outstanding care.",
-        rate:"⭐⭐⭐⭐"
+        rate:"⭐⭐⭐⭐⭐"
       },
       {
         id: 3,
         name: "Mohmmad Elyakoubi",
         city: "Rabat",
         comment:"I truly appreciate the professionalism and kindness of the medical team at MedCare. They made me feel comfortable and well taken care of.",
-        rate:"⭐⭐⭐⭐"
+        rate:"⭐⭐⭐⭐⭐"
       },
       {
         id: 4,
         name: "Soufian Benzidan",
         city: "Taroudant",
         comment:"Very satisfied with the service at MedCare Clinic. The doctors are skilled, and the reception team is welcoming and helpful.",
-        rate:"⭐⭐⭐⭐"
+        rate:"⭐⭐⭐⭐⭐"
       },
       {
         id: 4,
         name: "Soufian Benzidan",
         city: "Taroudant",
         comment:"Very satisfied with the service at MedCare Clinic. The doctors are skilled, and the reception team is welcoming and helpful.",
-        rate:"⭐⭐⭐⭐"
+        rate:"⭐⭐⭐⭐⭐"
       },
     ]
   return (
@@ -76,7 +76,7 @@ export default function Home() {
         </div>
 
         <div className="relative z-10">
-          <Image src="/DoctorPhoto.png" alt="Doctor" width={480} height={450} className="absolute bottom-0 right-4 drop-shadow-[-10px_0_20px_rgba(0,0,0,0.45)] z-0"></Image>
+          <Image  src="/DoctorPhoto.png" alt="Doctor" width={480} height={450}  className="absolute bottom-0 right-4 drop-shadow-[-10px_0_20px_rgba(0,0,0,0.45)] z-0"></Image>
         </div>
       </div>
         {/* *****************  End  ******************** */}

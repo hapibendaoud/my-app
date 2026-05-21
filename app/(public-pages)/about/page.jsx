@@ -10,6 +10,155 @@ import {
   MorphingDialogDescription,
   MorphingDialogContainer,
 } from '@/components/motion-primitives/morphing-dialog';
+import Marquee from "@/components/animata/container/marquee";
+
+const departments = [
+  {
+    name: "General & Advanced Surgery",
+    description: "This department features state-of-the-art operating theatres equipped with advanced surgical lighting and premium sterilization systems. Our highly synchronized surgical teams perform complex and minor procedures with ultimate precision in a 100% sterile and safe environment.",
+    image: "/photo-1.jpg",
+    prop: "row-span-2"
+  },
+  {
+    name: "Plastic & Reconstructive Surgery",
+    description: "We offer advanced surgical solutions in aesthetics and reconstruction, utilizing globally certified, premium medical materials (such as safe silicone implants). Our specialized surgeons combine medical excellence with artistic precision to ensure natural-looking results.",
+    image: "/photo-2.jpg",
+    prop: ""
+  },
+  {
+    name: "Obstetrics & Neonatal Care",
+    description: "Your first moments with your newborn are surrounded by the highest level of care. This department provides a warm, fully equipped environment to welcome newborns, with immediate pediatric monitoring and specialized nursing care from the very first seconds of birth.",
+    image: "/photo-3.jpg",
+    prop: "row-span-2"
+  },
+  {
+    name: "Clinical Consultations & Therapy",
+    description: "This department features state-of-the-art operating theatres equipped with advanced surgical lighting and premium sterilization systems. Our highly synchronized surgical teams perform complex and minor procedures with ultimate precision in a 100% sterile and safe environment.",
+    image: "/photo-4.jpg",
+    prop: "row-span-2"
+  }
+];
+
+function ClinicDepartments({department}) {
+  return (
+    <>
+      <div className={department.prop}>
+            <MorphingDialog
+              transition={{
+                type: 'spring',
+                bounce: 0.05,
+                duration: 0.25,
+              }}
+            >
+              <MorphingDialogTrigger
+                style={{
+                  borderRadius: '12px',
+                }}
+                className='flex flex-col overflow-hidden  bg-white dark:border-zinc-50/10 dark:bg-zinc-900'
+              >
+                <MorphingDialogImage
+                  src={department.image}
+                  alt={department.name}
+                  className='h-fit w-full object-cover'
+                />
+                <div className='flex grow flex-row items-end justify-between px-3 py-2'>
+                  <div>
+                    <MorphingDialogTitle className='text-zinc-950 dark:text-zinc-50'>
+                      {department.name}
+                    </MorphingDialogTitle>
+                  </div>
+                </div>
+              </MorphingDialogTrigger>
+              <MorphingDialogContainer>
+                <MorphingDialogContent
+                  style={{
+                    borderRadius: '24px',
+                  }}
+                  className='pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 '
+                >
+                  <MorphingDialogImage
+                    src={department.image}
+                    alt={department.name}
+                    className='h-115 w-auto'
+                  />
+                  <div className='p-6'>
+                    <MorphingDialogTitle className='text-2xl text-zinc-950 dark:text-zinc-50'>
+                      {department.name}
+                    </MorphingDialogTitle>
+                    <MorphingDialogDescription
+                      disableLayoutAnimation
+                      variants={{
+                        initial: { opacity: 0, scale: 0.8, y: 100 },
+                        animate: { opacity: 1, scale: 1, y: 0 },
+                        exit: { opacity: 0, scale: 0.8, y: 100 },
+                      }}
+                    >
+                      <p className='mt-2 text-zinc-500 dark:text-zinc-500'>
+                        {department.description}
+                      </p>
+                    </MorphingDialogDescription>
+                  </div>
+                  <MorphingDialogClose className='text-zinc-50' />
+                </MorphingDialogContent>
+              </MorphingDialogContainer>
+            </MorphingDialog>
+        </div>
+    </>
+  );
+}
+
+// 1. مصفوفة بيانات أعضاء الفريق لسهولة التعديل والإضافة لاحقاً
+const teamData = [
+  {
+    name: "Amine",
+    age: 29,
+    image: "/nurs-1.jpg",
+    description: "An ER nurse at MedCare developed the 'UrgeCheck' app to log patients' vitals via voice commands, saving time and lives."
+  },
+  {
+    name: "Sara",
+    age: 27,
+    image: "/nurs-1.jpg",
+    description: "Specialized in emergency triage and digital health coordination, ensuring flawless workflows during peak hours."
+  },
+  {
+    name: "Youssef",
+    age: 31,
+    image: "/nurs-1.jpg",
+    description: "Expert ICU assistant focusing on patient monitoring systems and post-surgical immediate care."
+  },
+  {
+    name: "Malak",
+    age: 26,
+    image: "/nurs-1.jpg",
+    description: "Pediatric care specialist certified in compassionate family handling and clinical checkups."
+  }
+];
+
+
+function TeamMemberCard({ member }) {
+  return (
+    <div className="grid grid-cols-3  h-70 w-150 gap-4 rounded-2xl overflow-hidden border bg-white p-2 dark:border-zinc-700 dark:bg-zinc-900 shrink-0 mx-2">
+      <div className="relative w-full h-full rounded-xl overflow-hidden">
+        <Image 
+          src={member.image} 
+          alt={member.name} 
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="col-span-2 flex flex-col justify-center">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-zinc-50">
+          {member.name} ({member.age})
+        </h2>
+        <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1 line-clamp-3">
+          {member.description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 
 
 export default function About() {
@@ -61,266 +210,39 @@ export default function About() {
       </div>
       <h2 className="autoShow border-t border-b border-gray-300 py-4 text-blue-600 font-bold text-5xl px-15"><span className=" ">Clinic</span><span className="text-green-600 "> Departments</span></h2>
       <div className="w-full h-fit grid grid-cols-2 gap-10 py-10 px-15">
-        <div className="row-span-2">
-            <MorphingDialog
-              transition={{
-                type: 'spring',
-                bounce: 0.05,
-                duration: 0.25,
-              }}
-            >
-              <MorphingDialogTrigger
-                style={{
-                  borderRadius: '12px',
-                }}
-                className='flex flex-col overflow-hidden  bg-white dark:border-zinc-50/10 dark:bg-zinc-900'
-              >
-                <MorphingDialogImage
-                  src='/photo-1.jpg'
-                  alt='photo 1'
-                  className='h-fit w-full object-cover'
-                />
-                <div className='flex grow flex-row items-end justify-between px-3 py-2'>
-                  <div>
-                    <MorphingDialogTitle className='text-zinc-950 dark:text-zinc-50'>
-                      General & Advanced Surgery Department
-                    </MorphingDialogTitle>
-                  </div>
-                </div>
-              </MorphingDialogTrigger>
-              <MorphingDialogContainer>
-                <MorphingDialogContent
-                  style={{
-                    borderRadius: '24px',
-                  }}
-                  className='pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 sm:w-[500px]'
-                >
-                  <MorphingDialogImage
-                    src='/photo-1c.jpg'
-                    alt='photo 1c'
-                    className='h-115 w-auto'
-                  />
-                  <div className='p-6'>
-                    <MorphingDialogTitle className='text-2xl text-zinc-950 dark:text-zinc-50'>
-                      General & Advanced Surgery Department
-                    </MorphingDialogTitle>
-                    <MorphingDialogDescription
-                      disableLayoutAnimation
-                      variants={{
-                        initial: { opacity: 0, scale: 0.8, y: 100 },
-                        animate: { opacity: 1, scale: 1, y: 0 },
-                        exit: { opacity: 0, scale: 0.8, y: 100 },
-                      }}
-                    >
-                      <p className='mt-2 text-zinc-500 dark:text-zinc-500'>
-                        This department features state-of-the-art operating theatres equipped with advanced surgical lighting and premium 
-                        sterilization systems. Our highly synchronized surgical teams perform complex and minor procedures with ultimate 
-                        precision in a 100% sterile and safe environment.
-                      </p>
-                    </MorphingDialogDescription>
-                  </div>
-                  <MorphingDialogClose className='text-zinc-50' />
-                </MorphingDialogContent>
-              </MorphingDialogContainer>
-            </MorphingDialog>
-        </div>
-
-        <div>
-          <MorphingDialog
-              transition={{
-                type: 'spring',
-                bounce: 0.05,
-                duration: 0.25,
-              }}
-            >
-              <MorphingDialogTrigger
-                style={{
-                  borderRadius: '12px',
-                }}
-                className='flex flex-col overflow-hidden   bg-white dark:border-zinc-50/10 dark:bg-zinc-900'
-              >
-                <MorphingDialogImage
-                  src='/photo-2.jpg'
-                  alt='photo 2'
-                  className='h-fit w-full object-cover'
-                />
-                <div className='flex grow flex-row items-end justify-between px-3 py-2'>
-                  <div>
-                    <MorphingDialogTitle className='text-zinc-950 dark:text-zinc-50'>
-                      Plastic & Reconstructive Surgery Department
-                    </MorphingDialogTitle>
-                  </div>
-                </div>
-              </MorphingDialogTrigger>
-              <MorphingDialogContainer>
-                <MorphingDialogContent
-                  style={{
-                    borderRadius: '24px',
-                  }}
-                  className='pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 sm:w-[500px]'
-                >
-                  <MorphingDialogImage
-                    src='/photo-2.jpg'
-                    alt='photo 2'
-                    className='h-auto w-fit'
-                  />
-                  <div className='p-6'>
-                    <MorphingDialogTitle className='text-2xl text-zinc-950 dark:text-zinc-50'>
-                      Plastic & Reconstructive Surgery Department
-                    </MorphingDialogTitle>
-                    <MorphingDialogDescription
-                      disableLayoutAnimation
-                      variants={{
-                        initial: { opacity: 0, scale: 0.8, y: 100 },
-                        animate: { opacity: 1, scale: 1, y: 0 },
-                        exit: { opacity: 0, scale: 0.8, y: 100 },
-                      }}
-                    >
-                      <p className='mt-2 text-zinc-500 dark:text-zinc-500'>
-                        We offer advanced surgical solutions in aesthetics and reconstruction, utilizing globally certified, premium medical 
-                        materials (such as safe silicone implants). Our specialized surgeons combine medical excellence with artistic precision 
-                        to ensure natural-looking results.
-                      </p>
-                    </MorphingDialogDescription>
-                  </div>
-                  <MorphingDialogClose className='text-zinc-50' />
-                </MorphingDialogContent>
-              </MorphingDialogContainer>
-            </MorphingDialog>
-        </div>
-        <div className="row-span-2">
-          <MorphingDialog
-              transition={{
-                type: 'spring',
-                bounce: 0.05,
-                duration: 0.25,
-              }}
-            >
-              <MorphingDialogTrigger
-                style={{
-                  borderRadius: '12px',
-                }}
-                className='flex flex-col overflow-hidden   bg-white dark:border-zinc-50/10 dark:bg-zinc-900'
-              >
-                <MorphingDialogImage
-                  src='/photo-3.jpg'
-                  alt='photo 3'
-                  className='h-fit w-full object-cover'
-                />
-                <div className='flex grow flex-row items-end justify-between px-3 py-2'>
-                  <div>
-                    <MorphingDialogTitle className='text-zinc-950 dark:text-zinc-50'>
-                      Obstetrics & Neonatal Care Department
-                    </MorphingDialogTitle>
-                  </div>
-                </div>
-              </MorphingDialogTrigger>
-              <MorphingDialogContainer>
-                <MorphingDialogContent
-                  style={{
-                    borderRadius: '24px',
-                  }}
-                  className='pointer-events-auto relative flex h-fit w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 sm:w-[500px]'
-                >
-                  <MorphingDialogImage
-                    src='/photo-3c.jpg'
-                    alt='photo 3c'
-                    className='h-117 w-auto'
-                  />
-                  <div className='p-6'>
-                    <MorphingDialogTitle className='text-2xl text-zinc-950 dark:text-zinc-50'>
-                      Obstetrics & Neonatal Care Department
-                    </MorphingDialogTitle>
-                    <MorphingDialogDescription
-                      disableLayoutAnimation
-                      variants={{
-                        initial: { opacity: 0, scale: 0.8, y: 100 },
-                        animate: { opacity: 1, scale: 1, y: 0 },
-                        exit: { opacity: 0, scale: 0.8, y: 100 },
-                      }}
-                    >
-                      <p className='mt-2 text-zinc-500 dark:text-zinc-500'>
-                        Your first moments with your newborn are surrounded by the highest level of care. This department provides a warm, fully 
-                        equipped environment to welcome newborns, with immediate pediatric monitoring and specialized nursing care from the very 
-                        first seconds of birth.
-                      </p>
-                    </MorphingDialogDescription>
-                  </div>
-                  <MorphingDialogClose className='text-zinc-50' />
-                </MorphingDialogContent>
-              </MorphingDialogContainer>
-            </MorphingDialog>
-        </div>
-        <div className="row-span-2">
-          <MorphingDialog
-              transition={{
-                type: 'spring',
-                bounce: 0.05,
-                duration: 0.25,
-              }}
-            >
-              <MorphingDialogTrigger
-                style={{
-                  borderRadius: '12px',
-                }}
-                className='flex flex-col overflow-hidden  bg-white dark:border-zinc-50/10 dark:bg-zinc-900'
-              >
-                <MorphingDialogImage
-                  src='/photo-4.jpg'
-                  alt='photo 4'
-                  className='h-fit w-full object-cover'
-                />
-                <div className='flex grow flex-row items-end justify-between px-3 py-2'>
-                  <div>
-                    <MorphingDialogTitle className='text-zinc-950 dark:text-zinc-50'>
-                      Clinical Consultations & Therapy Department
-                    </MorphingDialogTitle>
-                  </div>
-                </div>
-              </MorphingDialogTrigger>
-              <MorphingDialogContainer>
-                <MorphingDialogContent
-                  style={{
-                    borderRadius: '24px',
-                  }}
-                  className='pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 sm:w-[500px]'
-                >
-                  <MorphingDialogImage
-                    src='/photo-4c.jpg'
-                    alt='photo 4c'
-                    className='h-115 w-auto'
-                  />
-                  <div className='p-6'>
-                    <MorphingDialogTitle className='text-2xl text-zinc-950 dark:text-zinc-50'>
-                      Clinical Consultations & Therapy Department
-                    </MorphingDialogTitle>
-                    <MorphingDialogDescription
-                      disableLayoutAnimation
-                      variants={{
-                        initial: { opacity: 0, scale: 0.8, y: 100 },
-                        animate: { opacity: 1, scale: 1, y: 0 },
-                        exit: { opacity: 0, scale: 0.8, y: 100 },
-                      }}
-                    >
-                      <p className='mt-2 text-zinc-500 dark:text-zinc-500'>
-                        This department features state-of-the-art operating theatres equipped with advanced surgical lighting and premium 
-                        sterilization systems. Our highly synchronized surgical teams perform complex and minor procedures with ultimate 
-                        precision in a 100% sterile and safe environment.
-                      </p>
-                    </MorphingDialogDescription>
-                  </div>
-                  <MorphingDialogClose className='text-zinc-50' />
-                </MorphingDialogContent>
-              </MorphingDialogContainer>
-            </MorphingDialog>
-        </div>
+        <ClinicDepartments department={departments[0]} />
+        <ClinicDepartments department={departments[1]} />
+        <ClinicDepartments department={departments[2]} />
+        <ClinicDepartments department={departments[3]} />
         <div className="row-span-2">
           <h2 className="autoShow border-t border-b border-gray-300 py-4 text-blue-600 font-bold text-4xl px-15"><span className=" ">To Explore </span><span className="text-green-600 "> More</span> Information</h2>
           <p className="w-full h-fit text-gray-500  indent-8">Click on the Picture</p>
-        </div>
+        </div> 
       </div>
+
       <div className="px-15">
         <h1 className="text-6xl text-gray-700 font-bold pb-7"><span className="text-blue-600">Our</span><span className="text-green-600"> Teame</span></h1>
+      </div>
+      <div className="w-full flex flex-col gap-4 py-6 overflow-hidden">
+        {/* السطر الأول يتحرك يميناً */}
+        <Marquee className="[--duration:35s]" pauseOnHover applyMask={false}>
+          {teamData.map((member, index) => (
+            <TeamMemberCard key={`row1-${index}`} member={member} />
+          ))}
+        </Marquee>
+
+        {/* السطر الثاني يتحرك يساراً (اتجاه معاكس) ليعطي حيوية للتصميم */}
+        <Marquee reverse className="[--duration:35s]" pauseOnHover applyMask={false}>
+          {teamData.map((member, index) => (
+            <TeamMemberCard key={`row2-${index}`} member={member} />
+          ))}
+        </Marquee>
+
+        <Marquee className="[--duration:35s]" pauseOnHover applyMask={false}>
+          {teamData.map((member, index) => (
+            <TeamMemberCard key={`row3-${index}`} member={member} />
+          ))}
+        </Marquee>
       </div>
     </>
   );
