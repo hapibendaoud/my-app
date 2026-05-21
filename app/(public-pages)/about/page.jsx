@@ -111,26 +111,26 @@ function ClinicDepartments({department}) {
 const teamData = [
   {
     name: "Amine",
-    age: 29,
+    age: 27,
     image: "/nurs-1.jpg",
     description: "An ER nurse at MedCare developed the 'UrgeCheck' app to log patients' vitals via voice commands, saving time and lives."
   },
   {
-    name: "Sara",
-    age: 27,
-    image: "/nurs-1.jpg",
+    name: "Youssef",
+    age: 31,
+    image: "/nurs-2.jpg",
     description: "Specialized in emergency triage and digital health coordination, ensuring flawless workflows during peak hours."
   },
   {
-    name: "Youssef",
-    age: 31,
-    image: "/nurs-1.jpg",
+    name: "Sara",
+    age: 27,
+    image: "/nurs-3.jpg",
     description: "Expert ICU assistant focusing on patient monitoring systems and post-surgical immediate care."
   },
   {
-    name: "Malak",
-    age: 26,
-    image: "/nurs-1.jpg",
+    name: "Mohamed",
+    age: 29,
+    image: "/nurs-4.jpg",
     description: "Pediatric care specialist certified in compassionate family handling and clinical checkups."
   }
 ];
