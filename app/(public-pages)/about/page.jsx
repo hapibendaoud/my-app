@@ -11,6 +11,7 @@ import {
   MorphingDialogContainer,
 } from '@/components/motion-primitives/morphing-dialog';
 import Marquee from "@/components/animata/container/marquee";
+import ScrollingTestimonials from "@/components/animata/container/scrolling-testimonials";
 
 const departments = [
   {
@@ -74,12 +75,12 @@ function ClinicDepartments({department}) {
                   style={{
                     borderRadius: '24px',
                   }}
-                  className='pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 '
+                  className='pointer-events-auto relative flex h-auto w-150 flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 '
                 >
                   <MorphingDialogImage
                     src={department.image}
                     alt={department.name}
-                    className='h-115 w-auto'
+                    className='h-160 w-auto'
                   />
                   <div className='p-6'>
                     <MorphingDialogTitle className='text-2xl text-zinc-950 dark:text-zinc-50'>
@@ -136,28 +137,6 @@ const teamData = [
 ];
 
 
-function TeamMemberCard({ member }) {
-  return (
-    <div className="grid grid-cols-3  h-70 w-150 gap-4 rounded-2xl overflow-hidden border bg-white p-2 dark:border-zinc-700 dark:bg-zinc-900 shrink-0 mx-2">
-      <div className="relative w-full h-full rounded-xl overflow-hidden">
-        <Image 
-          src={member.image} 
-          alt={member.name} 
-          fill
-          className="object-cover"
-        />
-      </div>
-      <div className="col-span-2 flex flex-col justify-center">
-        <h2 className="text-xl font-bold text-gray-800 dark:text-zinc-50">
-          {member.name} ({member.age})
-        </h2>
-        <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1 line-clamp-3">
-          {member.description}
-        </p>
-      </div>
-    </div>
-  );
-}
 
 
 
@@ -167,7 +146,7 @@ export default function About() {
       <div className="w-full h-fit flex flex-col  gap-10 py-10 px-15">
         <h2 className="text-blue-600 font-bold text-5xl">About Our <span className="text-green-600 font-bold">Clinic</span></h2>
         <div className="w-full h-fit flex itmes-center justify-center">
-          <Image src="/ClinicFace.png" alt="About Us" width={480} height={450} className="w-8/9 h-130 "/>
+          <Image src="/ClinicFace.png" alt="About Us" width={480} height={450} className="w-8/9 h-130 " priority/>
         </div>
         <div className="flex flex-col px-17 ">
           <h2 className="autoShow text-3xl border-t border-gray-300 py-4"><span className="text-blue-600 font-bold">Med</span><span className="text-green-600 font-bold">Care</span></h2>
@@ -223,27 +202,10 @@ export default function About() {
       <div className="px-15">
         <h1 className="text-6xl text-gray-700 font-bold pb-7"><span className="text-blue-600">Our</span><span className="text-green-600"> Teame</span></h1>
       </div>
-      <div className="w-full flex flex-col gap-4 py-6 overflow-hidden">
-        {/* السطر الأول يتحرك يميناً */}
-        <Marquee className="[--duration:35s]" pauseOnHover applyMask={false}>
-          {teamData.map((member, index) => (
-            <TeamMemberCard key={`row1-${index}`} member={member} />
-          ))}
-        </Marquee>
 
-        {/* السطر الثاني يتحرك يساراً (اتجاه معاكس) ليعطي حيوية للتصميم */}
-        <Marquee reverse className="[--duration:35s]" pauseOnHover applyMask={false}>
-          {teamData.map((member, index) => (
-            <TeamMemberCard key={`row2-${index}`} member={member} />
-          ))}
-        </Marquee>
+        <ScrollingTestimonials data={teamData} />
 
-        <Marquee className="[--duration:35s]" pauseOnHover applyMask={false}>
-          {teamData.map((member, index) => (
-            <TeamMemberCard key={`row3-${index}`} member={member} />
-          ))}
-        </Marquee>
-      </div>
+        
     </>
   );
 }

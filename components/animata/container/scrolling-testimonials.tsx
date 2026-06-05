@@ -1,34 +1,39 @@
 import Marquee from "@/components/animata/container/marquee";
+import Image from "next/image";
 
-interface Testimonial {
+interface member {
   name: string;
+  age: number;
   image: string;
   description: string;
 }
 
 interface TestimonialProps {
-  data: Testimonial[];
+  data: member[];
 }
 
-function TestimonialCard({
-  testimonial: { image, name, description },
-}: {
-  testimonial: Testimonial;
+function TeamMemberCard({
+  members: { image, name, age, description },
 }) {
   return (
-    <div
-      className="flex h-44 w-96 overflow-hidden rounded-xl border bg-background dark:border-zinc-700"
-      key={name}
-    >
-      <div className="relative h-full w-32 shrink-0 overflow-hidden">
-        <img src={image} alt={name} className="h-full w-full object-cover" />
+    <div className="grid grid-cols-3  h-70 w-150 gap-4 rounded-2xl overflow-hidden border bg-gray-200 p-2 dark:border-zinc-700 dark:bg-zinc-900 shrink-0 mx-2">
+      <div className="relative w-full h-full rounded-xl overflow-hidden">
+        <Image
+          src={image}
+          alt={name}
+          width={200}
+          height={300}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover w-full h-full"
+        />
       </div>
-      <div className="px-4 py-2">
-        <span className="block text-lg font-bold text-foreground">{name}</span>
-        <span className="-mt-1 mb-1 block text-sm font-medium leading-loose text-muted-foreground">
-          Founder of BAC
-        </span>
-        <span className="block text-sm text-foreground">{description} </span>
+      <div className="col-span-2 flex flex-col justify-center">
+        <h2 className="text-xl font-bold text-gray-800 dark:text-zinc-50">
+          {name} ({age})
+        </h2>
+        <p className="text-sm text-gray-500 dark:text-zinc-400 mt-1 line-clamp-3">
+          {description}
+        </p>
       </div>
     </div>
   );
@@ -36,22 +41,22 @@ function TestimonialCard({
 
 export default function ScrollingTestimonials({ data }: TestimonialProps) {
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col gap-4 py-6 overflow-hidden">
       <Marquee className="[--duration:25s]" pauseOnHover applyMask={false}>
-        {data.map((testimonial) => (
-          <TestimonialCard key={testimonial.name} testimonial={testimonial} />
+        {data.map((member) => (
+          <TeamMemberCard key={member.name} members={member} />
         ))}
       </Marquee>
 
       <Marquee reverse className="[--duration:25s]" pauseOnHover applyMask={false}>
-        {data.map((testimonial) => (
-          <TestimonialCard key={testimonial.name} testimonial={testimonial} />
+        {data.map((member) => (
+          <TeamMemberCard key={member.name} members={member} />
         ))}
       </Marquee>
 
       <Marquee className="[--duration:25s]" pauseOnHover applyMask={false}>
-        {data.map((testimonial) => (
-          <TestimonialCard key={testimonial.name} testimonial={testimonial} />
+        {data.map((member) => (
+          <TeamMemberCard key={member.name} members={member} />
         ))}
       </Marquee>
     </div>

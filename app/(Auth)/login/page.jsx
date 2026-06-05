@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Login() {
   return (
     <>
-        <section className="h-screen  flex items-center justify-center bg-gray-100">
+        <section className="h-screen bg-login flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-2xl p-10 w-87 text-center">
         
         <h2 className="text-2xl font-bold mb-2">Welcome Back</h2>

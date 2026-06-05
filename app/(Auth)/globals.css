@@ -7,10 +7,27 @@ body{
     height: 100vh;
 }
 .bg-login {
-    background-image: url("/backGround.jpg");
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-login::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/bg.jpg");
     background-size: cover;
     background-position: center;
+    filter: blur(10px);
+    transform: scale(1.1); /* باش مايبانوش الحواف */
+    z-index: 0;
 }
+
+.bg-login > * {
+    position: relative;
+    z-index: 1;
+}
+
 .autoShow{
     animation: autoShowAnimation both;
     animation-timeline: view(80% 5%);
