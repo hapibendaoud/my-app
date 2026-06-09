@@ -9,22 +9,22 @@ export default function Login() {
   return (
     <>
         <section className="h-screen bg-login flex items-center justify-center">
-      <div className="bg-white shadow-lg rounded-2xl p-10 w-87 text-center">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-10 w-87 text-center">
         
-        <h2 className="text-2xl font-bold mb-2">Welcome Back</h2>
-        <p className="text-gray-500 mb-6">Please login to your account</p>
+        <h2 className="text-2xl dark:text-white font-bold mb-2">Welcome Back</h2>
+        <p className="text-gray-500 dark:text-gray-300 mb-6">Please login to your account</p>
 
         <form className="space-y-4">
           <input
             type="email"
             placeholder="Email address"
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full dark:text-white border border-gray-300 dark:border-gray-500 dark:bg-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
           <input
             type="password"
             placeholder="Password"
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full dark:text-white border border-gray-300 dark:border-gray-500 dark:bg-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
           <button

@@ -1,5 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import Navbar from "@/components/Navbar/navbar";
+import Adnavbar from "@/components/adnavbar/adnavbar";
 import Footer from "@/components/footer/footer"
 import "@/app/globals.css";
 
@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-zinc-900 `}
       >
-        <Navbar/>
+        <Adnavbar/>
         {children}
         <Footer/>
       </body>

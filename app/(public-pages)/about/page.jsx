@@ -55,7 +55,7 @@ function ClinicDepartments({department}) {
                 style={{
                   borderRadius: '12px',
                 }}
-                className='flex flex-col overflow-hidden  bg-white dark:border-zinc-50/10 dark:bg-zinc-900'
+                className='flex flex-col overflow-hidden  bg-gray-200 border border-gray-300 dark:border-zinc-50/10 dark:bg-zinc-800'
               >
                 <MorphingDialogImage
                   src={department.image}
@@ -64,7 +64,7 @@ function ClinicDepartments({department}) {
                 />
                 <div className='flex grow flex-row items-end justify-between px-3 py-2'>
                   <div>
-                    <MorphingDialogTitle className='text-zinc-950 dark:text-zinc-50'>
+                    <MorphingDialogTitle className='text-gray-600 dark:text-zinc-50'>
                       {department.name}
                     </MorphingDialogTitle>
                   </div>
@@ -143,7 +143,7 @@ const teamData = [
 export default function About() {
   return (
     <>
-      <div className="w-full h-fit flex flex-col  gap-10 py-10 px-15">
+      <div className="w-full h-fit flex flex-col  gap-10 py-10 px-15 ">
         <h2 className="text-blue-600 font-bold text-5xl">About Our <span className="text-green-600 font-bold">Clinic</span></h2>
         <div className="w-full h-fit flex itmes-center justify-center">
           <Image src="/ClinicFace.png" alt="About Us" width={480} height={450} className="w-8/9 h-130 " priority/>
@@ -151,7 +151,7 @@ export default function About() {
         <div className="flex flex-col px-17 ">
           <h2 className="autoShow text-3xl border-t border-gray-300 py-4"><span className="text-blue-600 font-bold">Med</span><span className="text-green-600 font-bold">Care</span></h2>
           <p className="autoShow flex flex-col text-1xl pt-4 border-t border-gray-300">
-            <span className="w-full h-fit text-gray-500  indent-8">
+            <span className="w-full h-fit text-gray-500 dark:text-white indent-8">
               <span className="text-blue-600 font-bold">Med</span><span className="text-green-600 font-bold">Care </span> 
               is a multi-specialty medical clinic designed in accordance with modern healthcare standards 
               and equipped with advanced medical technology to ensure accurate diagnosis and effective treatment 
@@ -167,7 +167,7 @@ export default function About() {
         <div className="flex flex-col px-17 ">
           <h2 className="autoShow text-3xl border-t border-gray-300 py-4 text-blue-600 font-bold"><span className=" ">Med</span><span className="text-green-600 ">Care</span> Story</h2>
           <p className="autoShow flex flex-col text-1xl pt-4 border-t border-gray-300">
-            <span className="w-full h-fit text-gray-500  indent-8">
+            <span className="w-full h-fit text-gray-500 dark:text-white indent-8">
               Established in 2018, 
               <span className="text-blue-600 font-bold"> Med</span><span className="text-green-600 font-bold">Care </span> 
               Clinic opened its doors in the vibrant heart of Agadir, specifically in the historic neighborhood of Talborjt. 

@@ -85,19 +85,19 @@ export default function Home() {
              {/* The second suction and links */}
       <div className="relative w-full h-18 border-b border-gray-400 ">
         <div className="w-full h-15 grid grid-cols-3 gap-30 px-25 absolute bottom-8">
-          <Link href="/opening" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 cursor-pointer hover:bg-blue-200 hover:border-blue-800">
+          <Link href="/opening" className="autoShow flex flex-row items-center justify-center bg-white dark:bg-zinc-800 rounded-xl border border-gray-400 cursor-pointer hover:bg-blue-200 dark:hover:bg-blue-900 hover:border-blue-800">
             <Image src="/Opening.png" alt="Icone" width={20} height={20} className=""></Image>
-            <span className="pl-4 text-2xl text-gray-700">Opening Hours</span>
+            <span className="pl-4 text-2xl text-gray-700 dark:text-white">Opening Hours</span>
           </Link>
 
-          <Link href="/services" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 cursor-pointer hover:bg-green-200 hover:border-green-800">
+          <Link href="/services" className="autoShow flex flex-row items-center justify-center bg-white dark:bg-zinc-800 rounded-xl border border-gray-400 cursor-pointer hover:bg-green-200 dark:hover:bg-green-900 hover:border-green-800">
             <Image src="/Services.png" alt="Icone" width={20} height={20} className=""></Image>
-            <span className="pl-4 text-2xl text-gray-700">Our Services</span>
+            <span className="pl-4 text-2xl text-gray-700 dark:text-white">Our Services</span>
           </Link>
 
-          <Link href="/location" className="autoShow flex flex-row items-center justify-center bg-white rounded-xl border border-gray-400 z-10 cursor-pointer hover:bg-blue-200 hover:border-blue-800">
+          <Link href="/location" className="autoShow flex flex-row items-center justify-center bg-white dark:bg-zinc-800 rounded-xl border border-gray-400 z-10 cursor-pointer hover:bg-blue-200 dark:hover:bg-blue-900 hover:border-blue-800">
             <Image src="/about.png" alt="Icone" width={20} height={20} className=""></Image>
-            <span className="pl-4 text-2xl text-gray-700">Visit Our Location</span>
+            <span className="pl-4 text-2xl text-gray-700 dark:text-white">Visit Our Location</span>
           </Link>
         </div>
       </div>
@@ -105,7 +105,7 @@ export default function Home() {
 
           {/* Clinique Power */}
       <div className="flex flex-col w-full h-fitt pb-20 px-18 border-b border-gray-400">
-        <h1 className="autoShow w-full h-50 flex justify-center items-center text-4xl text-gray-700 underline decoration-gray-400">A Better Care Experience</h1>
+        <h1 className="autoShow w-full h-50 flex justify-center items-center text-4xl text-gray-700 dark:text-white underline decoration-gray-400">A Better Care Experience</h1>
         
         <div className="w-full h-fit grid grid-cols-3 gap-15">
           <AnimatedBackground
@@ -120,8 +120,8 @@ export default function Home() {
 
         {ITEMS.map((item, index) => (
           <div key={index} data-id={`card-${index}`} className="h-65 border-t border-b border-gray-400 px-2.5 py-10">
-            <h2 className="autoShow pb-5 text-xl text-gray-700">{item.title}</h2>
-            <p className="autoShow text-gray-500">{item.description}
+            <h2 className="autoShow pb-5 text-xl text-gray-700 dark:text-white">{item.title}</h2>
+            <p className="autoShow text-gray-500 dark:text-zinc-400">{item.description}
             </p>
           </div>
           ))}
@@ -135,12 +135,12 @@ export default function Home() {
         <div className="flex flex-col pt-20 pl-17 ">
           <h2 className="autoShow text-5xl border-t border-gray-300 py-4"><span className="text-blue-600 font-bold">Dr. Amin El Hashimi –</span><span className="text-green-600 font-bold"> Chief Surgeon</span></h2>
           <p className="autoShow flex flex-col text-2xl">
-            <span className="w-full h-fit pb-5 text-gray-500 border-t border-gray-300 pt-15 indent-8 tracking-wide">
+            <span className="w-full h-fit pb-5 text-gray-500 dark:text-zinc-400 border-t border-gray-300 pt-15 indent-8 tracking-wide">
               <b>Dr. Amin El Hashimi</b> is an experienced, multi-specialty surgeon. Thanks to advanced training across multiple 
               surgical disciplines, he is highly skilled in managing a wide range of complex medical cases with top-tier 
               precision.
             </span>
-            <span className="text-gray-500 pt-2 indent-8 tracking-wide">
+            <span className="text-gray-500 dark:text-zinc-400 pt-2 indent-8 tracking-wide">
               <b>Dr. Amin</b> prioritizes patient safety and health through accurate diagnosis and continuous follow-up. By combining 
               ethical standards with the latest surgical techniques, he consistently ensures optimal treatment outcomes.
             </span>
@@ -161,7 +161,7 @@ export default function Home() {
         <div className="flex flex-col pt-20 px-17 ">
           <h2 className="autoShow text-5xl border-t border-gray-300 py-4"><span className="text-blue-600 font-bold">Med</span><span className="text-green-600 font-bold">Care</span></h2>
           <p className="autoShow flex flex-col text-2xl pt-4 border-t border-gray-300">
-            <span className="w-full h-fit text-gray-500  indent-8">
+            <span className="w-full h-fit text-gray-500 dark:text-zinc-400 indent-8">
               <span className="text-blue-600 font-bold">Med</span><span className="text-green-600 font-bold">Care </span> 
               is a multi-specialty medical clinic that combines modern equipment with medical expertise to deliver integrated, 
               safe, and high-quality healthcare. The clinic operates under the supervision of a highly qualified physician 
@@ -184,14 +184,14 @@ export default function Home() {
         
         <div className="w-full  grid grid-cols-4 gap-15 px-17 ">
           {Patients.map((Patient, index) => (
-            <div key={index} className="w-full h-fit flex flex-wrap items-center  px-4 py-3 rounded-lg  bg-gray-300 hover:bg-gray-200 cursor-pointer">
-              <Image src="/Patient.jpeg" alt="Patient" width={50} height={40} className="rounded-full bg-amber-50"></Image>
+            <div key={index} className="w-full h-fit flex flex-wrap items-center  px-4 py-3 rounded-lg bg-gray-300 dark:bg-zinc-700 hover:bg-gray-200 dark:hover:bg-zinc-600 cursor-pointer">
+              <Image src="/Patient.jpeg" alt="Patient" width={50} height={40} className="rounded-full"></Image>
               <div className="w-fit  h-fit pl-4">
-                  <p className="text-base text-gray-800">{Patient.name}</p>
-                  <span className="text-sm text-gray-800">from {Patient.city}</span>
+                  <p className="text-base text-gray-800 dark:text-white">{Patient.name}</p>
+                  <span className="text-sm text-gray-800 dark:text-zinc-400">from {Patient.city}</span>
               </div>
               <div className="w-full h-fit py-2.5">
-                <p className="text-sm text-gray-600 pb-3.5">{Patient.comment}</p>
+                <p className="text-sm text-gray-600 dark:text-zinc-400 pb-3.5">{Patient.comment}</p> 
                 <span className="">{Patient.rate}</span>
               </div>
             </div>

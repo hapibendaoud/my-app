@@ -35,11 +35,11 @@ const services = [
 
 function ServiceCard({ service }) {
   return (
-    <div className="p-6 rounded-xl border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-gray-200">
+    <div className="p-6 rounded-xl border border-gray-200 dark:border-gray-600 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-gray-200 dark:bg-zinc-800 cursor-pointer">
 
       <div className="text-6xl mb-4">{service.icon}</div>
 
-      <h3 className="text-2xl font-bold text-gray-800">
+      <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
         {service.title}
       </h3>
 

@@ -16,7 +16,7 @@ function TeamMemberCard({
   members: { image, name, age, description },
 }) {
   return (
-    <div className="grid grid-cols-3  h-70 w-150 gap-4 rounded-2xl overflow-hidden border bg-gray-200 p-2 dark:border-zinc-700 dark:bg-zinc-900 shrink-0 mx-2">
+    <div className="grid grid-cols-3  h-70 w-150 gap-4 rounded-2xl overflow-hidden border border-gray-400 bg-gray-200 p-2 dark:border-zinc-700 dark:bg-zinc-800 shrink-0 mx-2">
       <div className="relative w-full h-full rounded-xl overflow-hidden">
         <Image
           src={image}
