@@ -23,7 +23,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 dark:bg-gray-900 from-slate-900 via-slate-850 to-gray-950 text-slate-100 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+    <div className="min-h-screen bg-gray-200 dark:bg-gray-950  text-slate-100 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
       <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 bg-white/5 backdrop-blur-md p-6 md:p-10 rounded-2xl border border-white/10 shadow-2xl">
         
         {/* Section 1: Contact Information */}

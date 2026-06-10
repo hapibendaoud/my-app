@@ -5,11 +5,12 @@ import React, { useState } from "react";
 export default function MedicalDashboard() {
   // 1. بيانات المريض (مخزنة مؤقتاً)
     const [patientInfo] = useState({
-    name: "Ahmed Alami",
+    id: "MED-9482",
+    name: "Said Ait Bendaoud",
     age: 34,
     bloodType: "O+",
     phone: "+212 612-345678",
-    email: "ahmed.alami@email.com",
+    email: "said.aitbendaoud@email.com",
     lastVisit: "May 20, 2026",
     });
 
@@ -50,27 +51,27 @@ export default function MedicalDashboard() {
     };
 
     return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-6 md:p-10">
+    <div className="min-h-screen dark:bg-gray-950 text-slate-100 p-6 md:p-10">
         
       {/* Header section */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
-        <div>
-            <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
-            Patient Dashboard
-            </h1>
-            <p className="text-slate-400 text-sm mt-1">Welcome back, manage your health and appointments.</p>
-        </div>
-        
-        {/* زر حجز موعد جديد */}
-        <button
-            onClick={() => setShowForm(!showForm)}
-            className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-500 hover:to-teal-400 text-white font-semibold py-2.5 px-5 rounded-xl shadow-lg transition duration-200 transform hover:-translate-y-0.5"
-        >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
-            </svg>
-            Book New Appointment
-        </button>
+            <div>
+                <h1 className="text-3xl font-bold tracking-tight text-blue-700">
+                Patient Dashboard
+                </h1>
+                <p className="text-slate-400 text-sm mt-1">Welcome back, manage your health and appointments.</p>
+            </div>
+            
+            {/* زر حجز موعد جديد */}
+            <button
+                onClick={() => setShowForm(!showForm)}
+                className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-500 hover:to-teal-400 text-white font-semibold py-2.5 px-5 rounded-xl shadow-lg transition duration-200 transform hover:-translate-y-0.5"
+            >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                </svg>
+                Book New Appointment
+            </button>
         </div>
 
       {/* Grid Layout الرئيسي */}
@@ -87,7 +88,7 @@ export default function MedicalDashboard() {
                 </div>
                 <div>
                 <h2 className="text-xl font-bold text-slate-200">{patientInfo.name}</h2>
-                <p className="text-sm text-teal-400 font-medium">Patient ID: #MED-9482</p>
+                <p className="text-sm text-teal-400 font-medium">Patient ID: {patientInfo.id}</p>
                 </div>
             </div>
 
