@@ -1,4 +1,4 @@
-import Contact from "@/components/contact/contact";
+import Contact from "@/pages/contact/contact";
 
 
 
