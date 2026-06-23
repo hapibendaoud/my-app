@@ -51,7 +51,7 @@ export default function MedicalDashboard() {
     };
 
     return (
-    <div className="min-h-screen dark:bg-gray-950 text-slate-100 p-6 md:p-10">
+    <div className="min-h-screen dark:bg-slate-950 text-slate-100 p-6 md:p-10">
         
       {/* Header section */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">

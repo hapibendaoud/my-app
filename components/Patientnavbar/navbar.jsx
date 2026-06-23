@@ -5,7 +5,7 @@ import TextBorderAnimation from "@/components/animata/text/text-border-animation
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-export default function Adnavbar(){
+export default function Navbar(){
     const pathname = usePathname();
     const [patientInfo] = useState({
         id: "MED-9482",
@@ -13,7 +13,7 @@ export default function Adnavbar(){
         });
     const isActive = (path) => pathname === path;
 return(
-    <div className="bg-white dark:bg-zinc-800  items-center flex justify-between w-full h-20 px-10 shadow-lg fixed top-0 z-40">
+    <div className="bg-white dark:bg-slate-900  items-center flex justify-between w-full h-20 px-10 shadow-lg fixed top-0 z-40">
         <div className="flex items-center justify-center cursor-pointer w-33.33% h-full pl-4 pt-0.5"> 
             <Link href={"/dashboard"}><Image src="/logo.png" alt="logo" width={200} height={200} className="w-auto h-auto"/></Link>
         </div>
@@ -28,7 +28,7 @@ return(
                 <h1 className="text-gray-700 font-bold text-2xl dark:text-white">{patientInfo.name}</h1>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Patient ID: {patientInfo.id}</p>
             </div>
-            <Link href={"/profile"}>
+            <Link href={"/dashboard/profile"}>
                 <div className="w-14 h-14 bg-gradient-to-tr from-blue-500 to-teal-400 rounded-full flex items-center justify-center text-xl font-bold text-slate-950 shadow-inner">
                     {patientInfo.name.split(" ").map(n => n[0]).join("")}
                 </div>

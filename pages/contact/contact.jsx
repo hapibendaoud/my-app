@@ -23,13 +23,13 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 dark:bg-gray-950  text-slate-100 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+    <div className="min-h-screen bg-gray-200 dark:bg-slate-950  text-slate-100 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
       <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 bg-white/5 backdrop-blur-md p-6 md:p-10 rounded-2xl border border-white/10 shadow-2xl">
         
         {/* Section 1: Contact Information */}
         <div className="flex flex-col justify-between space-y-8 pl-0 md:pl-6">
           <div>
-            <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight bg-gray-800-to-r from-gray-400 to-gray-400 bg-clip-text text-transparent mb-4">
+            <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight bg-slate-800-to-r from-slate-400 to-gray-400 bg-clip-text text-transparent mb-4">
               Get in Touch
             </h1>
             <p className="text-gray-800 dark:text-slate-400 text-lg leading-relaxed">

@@ -55,7 +55,7 @@ function ClinicDepartments({department}) {
                 style={{
                   borderRadius: '12px',
                 }}
-                className='flex flex-col overflow-hidden  bg-gray-200 border border-gray-300 dark:border-zinc-50/10 dark:bg-zinc-800'
+                className='flex flex-col overflow-hidden  bg-gray-200 border border-gray-300 dark:border-slate-50/10 dark:bg-slate-800'
               >
                 <MorphingDialogImage
                   src={department.image}
@@ -75,12 +75,12 @@ function ClinicDepartments({department}) {
                   style={{
                     borderRadius: '24px',
                   }}
-                  className='pointer-events-auto relative flex h-auto w-150 flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 '
+                  className='pointer-events-auto relative flex h-150 w-120 flex-col overflow-y-auto [scrollbar-width: none] [-ms-overflow-style: none] [&::-webkit-scrollbar]:hidden border border-slate-950/10 bg-white dark:border-slate-50/10 dark:bg-slate-900 '
                 >
                   <MorphingDialogImage
                     src={department.image}
                     alt={department.name}
-                    className='h-160 w-auto'
+                    className='h-auto w-auto'
                   />
                   <div className='p-6'>
                     <MorphingDialogTitle className='text-2xl text-zinc-950 dark:text-zinc-50'>
@@ -143,7 +143,7 @@ const teamData = [
 export default function About() {
   return (
     <>
-      <div className="w-full h-fit flex flex-col  gap-10 py-10 px-15 ">
+      <div className="w-full h-fit flex flex-col  gap-10 py-10 px-15 dark:bg-slate-950">
         <h2 className="text-blue-600 font-bold text-5xl">About Our <span className="text-green-600 font-bold">Clinic</span></h2>
         <div className="w-full h-fit flex itmes-center justify-center">
           <Image src="/ClinicFace.png" alt="About Us" width={480} height={450} className="w-8/9 h-130 " priority/>
@@ -165,8 +165,8 @@ export default function About() {
           </p>
         </div>
         <div className="flex flex-col px-17 ">
-          <h2 className="autoShow text-3xl border-t border-gray-300 py-4 text-blue-600 font-bold"><span className=" ">Med</span><span className="text-green-600 ">Care</span> Story</h2>
-          <p className="autoShow flex flex-col text-1xl pt-4 border-t border-gray-300">
+          <h2 className="autoShow text-3xl border-t border-slate-300 py-4 text-blue-600 font-bold"><span className=" ">Med</span><span className="text-green-600 ">Care</span> Story</h2>
+          <p className="autoShow flex flex-col text-1xl pt-4 border-t border-slate-300">
             <span className="w-full h-fit text-gray-500 dark:text-white indent-8">
               Established in 2018, 
               <span className="text-blue-600 font-bold"> Med</span><span className="text-green-600 font-bold">Care </span> 
@@ -187,14 +187,14 @@ export default function About() {
         </div>
         
       </div>
-      <h2 className="autoShow border-t border-b border-gray-300 py-4 text-blue-600 font-bold text-5xl px-15"><span className=" ">Clinic</span><span className="text-green-600 "> Departments</span></h2>
+      <h2 className="autoShow border-t border-b border-slate-300 py-4 text-blue-600 font-bold text-5xl px-15"><span className=" ">Clinic</span><span className="text-green-600 "> Departments</span></h2>
       <div className="w-full h-fit grid grid-cols-2 gap-10 py-10 px-15">
         <ClinicDepartments department={departments[0]} />
         <ClinicDepartments department={departments[1]} />
         <ClinicDepartments department={departments[2]} />
         <ClinicDepartments department={departments[3]} />
         <div className="row-span-2">
-          <h2 className="autoShow border-t border-b border-gray-300 py-4 text-blue-600 font-bold text-4xl px-15"><span className=" ">To Explore </span><span className="text-green-600 "> More</span> Information</h2>
+          <h2 className="autoShow border-t border-b border-slate-300 py-4 text-blue-600 font-bold text-4xl px-15"><span className=" ">To Explore </span><span className="text-green-600 "> More</span> Information</h2>
           <p className="w-full h-fit text-gray-500  indent-8">Click on the Picture</p>
         </div> 
       </div>

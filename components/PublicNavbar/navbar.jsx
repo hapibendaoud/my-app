@@ -9,7 +9,7 @@ export default function Navbar(){
 
     const isActive = (path) => pathname === path;
 return(
-    <div className="bg-white dark:bg-zinc-800  items-center flex justify-between w-full h-20 px-10 shadow-lg fixed top-0 z-40">
+    <div className="bg-white dark:bg-slate-900  items-center flex justify-between w-full h-20 px-10 shadow-lg fixed top-0 z-40">
         <div className="flex items-center justify-center cursor-pointer w-33.33% h-full pl-4 pt-0.5"> 
             <Link href={"/"}><Image src="/logo.png" alt="logo" width={200} height={200} loading="eager" className="w-auto h-auto"/></Link>
         </div>

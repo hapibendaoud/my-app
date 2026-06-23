@@ -4,7 +4,7 @@ import TextBorderAnimation from "@/components/animata/text/text-border-animation
 
 export default function Footer(){
     return(
-        <footer className="w-full h-fit">
+        <footer className="w-full h-fit bg-gray-100 dark:bg-slate-950">
             <div className="w-full h-fit flex justify-center gap-20  items-center border-t border-gray-300 py-7">
                 <Link href={"/About"}><div className="cursor-pointer text-gray-700 dark:text-white"><TextBorderAnimation text="About Us"/></div></Link>
                 <Link href={"/Services"}><div className="cursor-pointer text-gray-700 dark:text-white py-1 "><TextBorderAnimation text="Terms of Services"/></div></Link>
