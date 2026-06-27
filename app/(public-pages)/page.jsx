@@ -85,17 +85,17 @@ export default function Home() {
              {/* The second suction and links */}
       <div className="relative w-full h-18 border-b border-gray-400 ">
         <div className="w-full h-15 grid grid-cols-3 gap-30 px-25 absolute bottom-8">
-          <Link href="/opening" className="autoShow flex flex-row items-center justify-center bg-white dark:bg-zinc-800 rounded-xl border border-gray-400 cursor-pointer hover:bg-blue-200 dark:hover:bg-blue-900 hover:border-blue-800">
+          <Link href="/opening" className="autoShow flex flex-row items-center justify-center bg-white dark:bg-slate-800 rounded-xl border border-gray-400 cursor-pointer hover:bg-blue-200 dark:hover:bg-blue-900 hover:border-blue-800">
             <Image src="/Opening.png" alt="Icone" width={20} height={20} className=""></Image>
             <span className="pl-4 text-2xl text-gray-700 dark:text-white">Opening Hours</span>
           </Link>
 
-          <Link href="/services" className="autoShow flex flex-row items-center justify-center bg-white dark:bg-zinc-800 rounded-xl border border-gray-400 cursor-pointer hover:bg-green-200 dark:hover:bg-green-900 hover:border-green-800">
+          <Link href="/services" className="autoShow flex flex-row items-center justify-center bg-white dark:bg-slate-800 rounded-xl border border-gray-400 cursor-pointer hover:bg-green-200 dark:hover:bg-green-900 hover:border-green-800">
             <Image src="/Services.png" alt="Icone" width={20} height={20} className=""></Image>
             <span className="pl-4 text-2xl text-gray-700 dark:text-white">Our Services</span>
           </Link>
 
-          <Link href="/location" className="autoShow flex flex-row items-center justify-center bg-white dark:bg-zinc-800 rounded-xl border border-gray-400 z-10 cursor-pointer hover:bg-blue-200 dark:hover:bg-blue-900 hover:border-blue-800">
+          <Link href="/location" className="autoShow flex flex-row items-center justify-center bg-white dark:bg-slate-800 rounded-xl border border-gray-400 z-10 cursor-pointer hover:bg-blue-200 dark:hover:bg-blue-900 hover:border-blue-800">
             <Image src="/about.png" alt="Icone" width={20} height={20} className=""></Image>
             <span className="pl-4 text-2xl text-gray-700 dark:text-white">Visit Our Location</span>
           </Link>
@@ -104,12 +104,12 @@ export default function Home() {
       {/* *****************   end   ******************* */}
 
           {/* Clinique Power */}
-      <div className="flex flex-col w-full h-fitt pb-20 px-18 border-b border-gray-400">
-        <h1 className="autoShow w-full h-50 flex justify-center items-center text-4xl text-gray-700 dark:text-white underline decoration-gray-400">A Better Care Experience</h1>
+      <div className="flex flex-col w-full h-fitt pb-20 px-18 border-b border-slate-400">
+        <h1 className="autoShow w-full h-50 flex justify-center items-center text-5xl font-bold text-gray-700 dark:text-blue-600 underline decoration-slate-400">A Better Care <span className="text-green-600">Experience</span></h1>
         
         <div className="w-full h-fit grid grid-cols-3 gap-15">
           <AnimatedBackground
-            className='rounded-lg bg-gray-200 dark:bg-zinc-800'
+            className='rounded-lg bg-gray-200 dark:bg-slate-800'
             transition={{
               type: 'spring',
               bounce: 0.2,
@@ -119,7 +119,7 @@ export default function Home() {
           >
 
         {ITEMS.map((item, index) => (
-          <div key={index} data-id={`card-${index}`} className="h-65 border-t border-b border-gray-400 px-2.5 py-10">
+          <div key={index} data-id={`card-${index}`} className="h-65 border-t border-b border-slate-400 px-2.5 py-10">
             <h2 className="autoShow pb-5 text-xl text-gray-700 dark:text-white">{item.title}</h2>
             <p className="autoShow text-gray-500 dark:text-zinc-400">{item.description}
             </p>

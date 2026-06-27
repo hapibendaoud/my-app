@@ -1,50 +1,87 @@
 import Link from "next/link";
 
-
 export default function Register() {
   return (
-        <section className="h-screen bg-login flex items-center justify-center">
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-10 w-87 text-center">
+    <section className="h-screen bg-slate-100 dark:bg-slate-950 flex items-center justify-center p-4">
+      {/* بدلت w-87 لـ w-full max-w-md باش تهز المعلومات كاملة وتجي متناسقة فالشاشات كاملين */}
+      <div className="bg-white dark:bg-slate-800 shadow-lg rounded-2xl p-8 w-full max-w-md text-center max-h-[95vh]">
 
-        <h2 className="text-2xl dark:text-white font-bold mb-2">Create Account</h2>
-        <p className="text-gray-500 dark:text-gray-300 mb-6">Register a new account</p>
+        <h2 className="text-2xl dark:text-white font-bold mb-1">Create Account</h2>
+        <p className="text-gray-500 dark:text-gray-300 mb-5 text-sm">Register a new patient account</p>
 
-        <form className="space-y-4">
-          <input
-            type="text"
-            placeholder="Full name"
-            className="w-full dark:text-white border border-gray-300 dark:border-gray-500 dark:bg-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <form className="space-y-4 text-left">
+          
+          {/* الاسم الكامل */}
+          <div>
+            <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1 ml-1">Full Name</label>
+            <input
+              type="text"
+              placeholder="John Doe"
+              className="w-full dark:text-white border border-gray-300 dark:border-slate-500 dark:bg-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            />
+          </div>
 
-          <input
-            type="email"
-            placeholder="Email address"
-            className="w-full dark:text-white border border-gray-300 dark:border-gray-500 dark:bg-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          {/* تاريخ الازدياد */}
+          <div>
+            <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1 ml-1">Date of Birth</label>
+            <input
+              type="date"
+              className="w-full text-slate-700 dark:text-white border border-gray-300 dark:border-slate-500 dark:bg-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            />
+          </div>
 
-          <input
-            type="number"
-            placeholder="Phone Number"
-            className="w-full dark:text-white border border-gray-300 dark:border-gray-500 dark:bg-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          {/* الجنس (اضافي ومهم للملف الطبي) */}
+          <div>
+            <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1 ml-1">Gender</label>
+            <select className="w-full text-slate-700 dark:text-white border border-gray-300 dark:border-slate-500 dark:bg-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
 
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full dark:text-white border border-gray-300 dark:border-gray-500 dark:bg-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          {/* البريد الإلكتروني */}
+          <div>
+            <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1 ml-1">Email Address</label>
+            <input
+              type="email"
+              placeholder="example@mail.com"
+              className="w-full dark:text-white border border-gray-300 dark:border-slate-500 dark:bg-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            />
+          </div>
 
+          {/* رقم الهاتف */}
+          <div>
+            <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1 ml-1">Phone Number</label>
+            <input
+              type="tel"
+              placeholder="+212 600-000000"
+              className="w-full dark:text-white border border-gray-300 dark:border-slate-500 dark:bg-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            />
+          </div>
+
+          {/* كلمة المرور */}
+          <div>
+            <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1 ml-1">Password</label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              className="w-full dark:text-white border border-gray-300 dark:border-slate-500 dark:bg-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            />
+          </div>
+
+          {/* زر التسجيل */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+            className="w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition font-medium text-sm mt-2"
           >
-            Register
+            Register Patient
           </button>
         </form>
 
-        <p className="text-sm text-gray-500 mt-4">
-          Already have an account?
-          <Link href="/login" className="text-blue-600 font-medium">
+        <p className="text-sm text-gray-500 ">
+          Already have an account?{" "}
+          <Link href="/login" className="text-blue-600 font-medium hover:underline">
             Login
           </Link>
         </p>
