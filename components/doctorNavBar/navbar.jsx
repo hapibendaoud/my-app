@@ -15,7 +15,7 @@ export default function Navbar(){
 return(
     <div className="bg-white dark:bg-slate-900  items-center flex justify-between w-full h-20 px-10 shadow-lg fixed top-0 z-40">
         <div className="flex items-center justify-center cursor-pointer w-33.33% h-full pl-4 pt-0.5"> 
-            <Link href={"/doctor"}><Image src="/logo.png" alt="logo" width={200} height={200} className="w-auto h-auto"/></Link>
+            <Link href={"/doctor"}><Image src="/logo.png" alt="logo" width={200} height={200} priority className="w-auto h-auto"/></Link>
         </div>
         <div className=" flex justify-around gap-8 h-full items-center w-33.33%">
             <Link href={"/doctor"}><div className="cursor-pointer text-gray-700  py-7"><TextBorderAnimation text="Home" className={`${isActive("/doctor") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-white"}`}/></div></Link>

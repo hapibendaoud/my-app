@@ -2,9 +2,11 @@
 
 import React, { useState } from "react";
 
+
+
 export default function MedicalDashboard() {
   // 1. بيانات المريض (مخزنة مؤقتاً)
-    const [patientInfo] = useState({
+    const [patientInfo, setPatient] = useState({
     id: "MED-9482",
     name: "Said Ait Bendaoud",
     age: 34,
@@ -16,11 +18,21 @@ export default function MedicalDashboard() {
 
   // 2. قائمة المواعيد (الجديدة والقديمة)
     const [appointments, setAppointments] = useState([
-    { id: 1, doctor: "Dr. Laila Bensouda", specialty: "Cardiologist", date: "2026-06-15", time: "10:00 AM", status: "Upcoming" },
-    { id: 2, doctor: "Dr. Karim Tazi", specialty: "Dermatologist", date: "2026-06-22", time: "03:30 PM", status: "Upcoming" },
-    { id: 3, doctor: "Dr. Laila Bensouda", specialty: "Cardiologist", date: "2026-05-20", time: "11:15 AM", status: "Completed" },
-    { id: 4, doctor: "Dr. Youssef El Amrani", specialty: "General Practitioner", date: "2026-04-12", time: "09:00 AM", status: "Completed" },
+    { id: 1, doctor: "Dr. Said", type: "Check-up", date: "2026-06-15", time: "10:00 AM", status: "Pending" },
+    { id: 2, doctor: "Dr. Said", type: "Follow-up", date: "2026-06-22", time: "03:30 PM", status: "confirmed" },
+    { id: 3, doctor: "Dr. Said", type: "Consultation", date: "2026-05-20", time: "11:15 AM", status: "cancelled" },
+    { id: 4, doctor: "Dr. Said", type: "Urgent", date: "2026-04-12", time: "09:00 AM", status: "Completed" },
     ]);
+    const statusOrder = {
+        "Pending" : 1,
+        "confirmed": 2,
+        "Completed": 3,
+        "cancelled": 4
+    };
+
+
+    const [selectedPatient, setSelectedPatient] = useState(appointments[1]);
+
 
   // 3. حالة الفورم ديال حجز موعد جديد
     const [showForm, setShowForm] = useState(false);
@@ -31,6 +43,19 @@ export default function MedicalDashboard() {
     if (confirm("Are you sure you want to cancel this appointment?")) {
         setAppointments(appointments.filter((appt) => appt.id !== id));
     }
+    };
+
+    const handleCancelled = (id) => {
+        if (confirm("Are you sure you want to cancel this appointment?")){
+            setAppointments(appointments.map(appt => 
+            appt.id === id ? { ...appt, status: "cancelled" } : appt
+            ));
+            
+            // تحديث المريض المحدد فـ الشاشة إذا تبدلات حالتو
+            if (selectedPatient.id === id) {
+            setSelectedPatient({ ...selectedPatient, status: "cancelled" });
+            }
+        }
     };
 
   // 5. دالة إضافة (حجز) موعد جديد
@@ -65,7 +90,7 @@ export default function MedicalDashboard() {
             {/* زر حجز موعد جديد */}
             <button
                 onClick={() => setShowForm(!showForm)}
-                className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-500 hover:to-teal-400 text-white font-semibold py-2.5 px-5 rounded-xl shadow-lg transition duration-200 transform hover:-translate-y-0.5"
+                className="flex items-center justify-center gap-2 bg-linear-to-r from-blue-600 to-teal-500 hover:from-blue-500 hover:to-teal-400 text-white font-semibold py-2.5 px-5 rounded-xl shadow-lg transition duration-200 transform hover:-translate-y-0.5"
             >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
@@ -83,7 +108,7 @@ export default function MedicalDashboard() {
           {/* كارت معلومات المريض */}
             <div className="bg-slate-900/60 backdrop-blur-md rounded-2xl p-6 border border-slate-800 shadow-xl">
             <div className="flex items-center space-x-4 mb-6">
-                <div className="w-14 h-14 bg-gradient-to-tr from-blue-500 to-teal-400 rounded-full flex items-center justify-center text-xl font-bold text-slate-950 shadow-inner">
+                <div className="w-14 h-14 bg-linear-to-tr from-blue-500 to-teal-400 rounded-full flex items-center justify-center text-xl font-bold text-slate-950 shadow-inner">
                 {patientInfo.name.split(" ").map(n => n[0]).join("")}
                 </div>
                 <div>
@@ -105,28 +130,28 @@ export default function MedicalDashboard() {
 
           {/* فورم حجز موعد جديد (Pop-in Form) */}
             {showForm && (
-            <div className="bg-slate-900/90 border border-blue-500/30 rounded-2xl p-6 shadow-2xl transition duration-300 animate-in fade-in slide-in-from-bottom-4">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-900 border border-blue-500/30 rounded-2xl p-6 shadow-2xl transition duration-300 animate-in fade-in slide-in-from-bottom-4">
                 <h3 className="text-lg font-bold text-slate-200 mb-4 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-blue-500"></span> Schedule Appointment
                 </h3>
                 <form onSubmit={handleBookAppointment} className="space-y-4 text-sm">
-                <div>
-                    <label className="block text-slate-400 mb-1.5">Doctor Name</label>
-                    <input
-                    type="text"
-                    required
-                    placeholder="e.g., Dr. Samir"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 focus:outline-none focus:border-blue-500 text-slate-200"
-                    value={newAppt.doctor}
-                    onChange={(e) => setNewAppt({ ...newAppt, doctor: e.target.value })}
-                    />
-                </div>
                 <div>
                     <label className="block text-slate-400 mb-1.5">Specialty</label>
                     <input
                     type="text"
                     required
                     placeholder="e.g., General"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 focus:outline-none focus:border-blue-500 text-slate-200"
+                    value={newAppt.doctor}
+                    onChange={(e) => setNewAppt({ ...newAppt, doctor: e.target.value })}
+                    />
+                </div>
+                <div>
+                    <label className="block text-slate-400 mb-1.5">Reason for Visit</label>
+                    <input
+                    type="text"
+                    required
+                    placeholder="e.g., Routine Checkup"
                     className="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 focus:outline-none focus:border-blue-500 text-slate-200"
                     value={newAppt.specialty}
                     onChange={(e) => setNewAppt({ ...newAppt, specialty: e.target.value })}
@@ -178,14 +203,16 @@ export default function MedicalDashboard() {
                 {appointments.length === 0 ? (
                 <p className="text-center text-slate-500 py-8">No appointments scheduled.</p>
                 ) : (
-                appointments.map((appt) => (
+                appointments
+                .sort((a, b) => (statusOrder[a.status] || 99) - (statusOrder[b.status] || 99))
+                .map((appt) => (
                     <div
                     key={appt.id}
                     className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-slate-900/80 border border-slate-800/60 rounded-xl gap-4 hover:border-slate-700 transition"
                     >
                     {/* معلومات الدكتور والوقت */}
                     <div className="flex items-start gap-3.5">
-                        <div className={`p-2.5 rounded-xl ${appt.status === "Upcoming" ? "bg-blue-500/10 text-blue-400" : "bg-slate-800 text-slate-400"}`}>
+                        <div className={`p-2.5 rounded-xl ${appt.status === "cancelled" ? "bg-blue-500/10 text-blue-400" : "bg-slate-800 text-slate-400"}`}>
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
@@ -204,25 +231,34 @@ export default function MedicalDashboard() {
                     <div className="flex items-center justify-between sm:justify-end gap-4 border-t sm:border-0 border-slate-800 pt-3 sm:pt-0">
                         <span
                         className={`text-xs px-2.5 py-1 rounded-full font-semibold ${
-                            appt.status === "Upcoming"
-                            ? "bg-blue-500/10 text-blue-400 border border-blue-500/20"
+                            appt.status === "cancelled"
+                            ? "bg-red-500/10 text-red-400 border border-red-500/20"
                             : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
                         }`}
                         >
                         {appt.status}
                         </span>
 
-                      {/* كيبان زر الإلغاء غير فالمواعيد المستقبلية (Upcoming) */}
-                        {appt.status === "Upcoming" && (
-                        <button
-                            onClick={() => handleCancelAppointment(appt.id)}
-                            className="p-2 text-slate-400 hover:text-rose-400 bg-slate-950 hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/20 rounded-xl transition"
-                            title="Cancel Appointment"
-                        >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                        </button>
+                      {/* كيبان زر الإلغاء غير فالمواعيد المستقبلية (cancelled) */}
+                        {appt.status === "Pending" && (
+                            <button
+                                onClick={(e) => {
+                                e.stopPropagation(); // باش ما يتفتحش الـ detail كارت بالخطأ
+                                handleCancelled(appt.id);
+                                }}
+                                className="text-xs font-semibold bg-red-600 hover:bg-red-500 text-slate-950 px-3 py-1.5 rounded-lg transition"
+                            > 
+                                cancelled
+                            </button>
+                        // <button
+                        //     onClick={() => handleCancelAppointment(appt.id)}
+                        //     className="p-2 text-slate-400 hover:text-rose-400 bg-slate-950 hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/20 rounded-xl transition"
+                        //     title="Cancel Appointment"
+                        // >
+                        //     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        //     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        //     </svg>
+                        // </button>
                         )}
                     </div>
                     </div>

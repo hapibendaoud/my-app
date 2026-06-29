@@ -2,9 +2,11 @@
 
 import React, { useState } from "react";
 
+
+
 export default function DoctorDashboard() {
   // 1. إحصائيات سريعة خاصة بالطبيب
-  const [stats] = useState({
+  const [stats, setStats] = useState({
     totalPatients: 42,
     todayAppointments: 8,
     pendingReports: 3,
@@ -12,26 +14,59 @@ export default function DoctorDashboard() {
 
   // 2. بيانات المواعيد والمرضى الخاصة بالطبيب ليومنا هذا
   const [appointments, setAppointments] = useState([
-    { id: 1, patientName: "Youssef Alami", age: 29, time: "09:30 AM", type: "Check-up", status: "Completed", phone: "+212 611-223344" },
-    { id: 2, patientName: "Fatima Zahra", age: 45, time: "10:15 AM", type: "Follow-up", status: "In Progress", phone: "+212 655-778899" },
-    { id: 3, patientName: "Amine Kamal", age: 34, time: "11:00 AM", type: "Consultation", status: "Upcoming", phone: "+212 644-556677" },
-    { id: 4, patientName: "Khadija Rouissi", age: 62, time: "02:00 PM", type: "Urgent", status: "Upcoming", phone: "+212 633-112233" },
+    { id: 1, patientName: "Youssef Alami", age: 29, date: "2026-06-15", time: "09:30 AM", type: "Check-up", status: "Completed", phone: "+212 611-223344" },
+    { id: 2, patientName: "Fatima Zahra", age: 45, date: "2026-06-15", time: "10:15 AM", type: "Follow-up", status: "Pending", phone: "+212 655-778899" },
+    { id: 3, patientName: "Amine Kamal", age: 34, date: "2026-06-15", time: "11:00 AM", type: "Consultation", status: "cancelled", phone: "+212 644-556677" },
+    { id: 4, patientName: "Khadija Rouissi", age: 62, date: "2026-06-15", time: "02:00 PM", type: "Urgent", status: "confirmed", phone: "+212 633-112233" },
   ]);
+  const statusOrder = {
+    "Pending" : 1,
+    "confirmed": 2,
+    "Completed": 3,
+    "cancelled": 4
+  };
 
   // 3. المريض اللي كليك عليه الدكتور باش يشوف معلوماته التفصيلية (الافتراضي هو الأول)
   const [selectedPatient, setSelectedPatient] = useState(appointments[1]);
 
   // دالة لتغيير حالة الموعد (مثلاً رده انتهى Completed)
   const handleComplete = (id) => {
-    setAppointments(appointments.map(appt => 
-      appt.id === id ? { ...appt, status: "Completed" } : appt
-    ));
-    // تحديث المريض المحدد فـ الشاشة إذا تبدلات حالتو
-    if (selectedPatient.id === id) {
-      setSelectedPatient({ ...selectedPatient, status: "Completed" });
+    if (confirm("Are you sure this appointment is Done?")){
+      setAppointments(appointments.map(appt => 
+        appt.id === id ? { ...appt, status: "Completed" } : appt
+      ));
+      
+      // تحديث المريض المحدد فـ الشاشة إذا تبدلات حالتو
+      if (selectedPatient.id === id) {
+        setSelectedPatient({ ...selectedPatient, status: "Completed" });
+      }
     }
   };
-
+  const handleCancelled = (id) => {
+    if (confirm("Are you sure you want to cancel this appointment?")){
+      setAppointments(appointments.map(appt => 
+        appt.id === id ? { ...appt, status: "cancelled" } : appt
+      ));
+      
+      // تحديث المريض المحدد فـ الشاشة إذا تبدلات حالتو
+      if (selectedPatient.id === id) {
+        setSelectedPatient({ ...selectedPatient, status: "cancelled" });
+      }
+    }
+  };
+    const handleConfirme = (id) => {
+      if (confirm("Are you sure you want to confirmed this appointment?")){
+        setAppointments(appointments.map(appt => 
+          appt.id === id ? { ...appt, status: "confirmed" } : appt
+        ));
+        
+        // تحديث المريض المحدد فـ الشاشة إذا تبدلات حالتو
+        if (selectedPatient.id === id) {
+          setSelectedPatient({ ...selectedPatient, status: "confirmed" });
+        }
+      }
+  };
+  
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-slate-950 text-slate-100 p-6 md:p-10">
       
@@ -79,7 +114,9 @@ export default function DoctorDashboard() {
           </h3>
           
           <div className="space-y-3">
-            {appointments.map((appt) => (
+            {appointments
+              .sort((a, b) => (statusOrder[a.status] || 99) - (statusOrder[b.status] || 99))
+              .map((appt) => (
               <div
                 key={appt.id}
                 onClick={() => setSelectedPatient(appt)}
@@ -102,13 +139,13 @@ export default function DoctorDashboard() {
                 <div className="flex items-center justify-between sm:justify-end gap-3 mt-3 sm:mt-0">
                   <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${
                     appt.status === "Completed" ? "bg-slate-800 text-slate-400" :
-                    appt.status === "In Progress" ? "bg-red-200 dark:bg-amber-500/10 text-red-600 dark:text-amber-400 border border-amber-500/20" :
+                    appt.status === "cancelled" ? "bg-red-200 dark:bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20" :
                     "bg-yellow-500/10 dark:bg-blue-500/10 text-yellow-700 dark:text-blue-400 border border-blue-500/20"
                   }`}>
                     {appt.status}
                   </span>
 
-                  {appt.status !== "Completed" && (
+                  {(appt.status !== "cancelled" && appt.status !== "Completed" && appt.status !== "Pending")  &&  (
                     <button
                       onClick={(e) => {
                         e.stopPropagation(); // باش ما يتفتحش الـ detail كارت بالخطأ
@@ -118,6 +155,30 @@ export default function DoctorDashboard() {
                     >
                       Done
                     </button>
+                  )}
+                  {appt.status === "Pending" &&  (
+                    <>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation(); // باش ما يتفتحش الـ detail كارت بالخطأ
+                          handleCancelled(appt.id);
+                        }}
+                        className="text-xs font-semibold bg-red-600 hover:bg-red-500 text-slate-950 px-3 py-1.5 rounded-lg transition"
+                      > 
+                        cancelled
+                      </button>
+                      
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation(); // باش ما يتفتحش الـ detail كارت بالخطأ
+                          handleConfirme(appt.id);
+                        }}
+                        className="text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-slate-950 px-3 py-1.5 rounded-lg transition"
+                      >
+                        Confirme
+                      </button>
+                    
+                    </>
                   )}
                 </div>
               </div>
