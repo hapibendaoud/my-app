@@ -62,7 +62,7 @@ export default function Home() {
     <>
       {/* The main Title and Information */}
       <div className="w-full min-h-screen md:h-144 bg-home grid grid-cols-1 md:grid-cols-2 px-4 sm:px-10 md:px-0 pt-24 md:pt-0 gap-8 overflow-hidden">
-        <div className="w-full h-full flex flex-col items-center md:items-start text-center md:text-left justify-center md:pt-40 md:pl-20">
+        <div className="w-full h-full flex flex-col items-center md:items-start text-center md:text-left justify-center md:pt-30 md:pl-20">
           <div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl text-gray-700 font-bold pb-5 md:pb-7">Welcome to <span className="text-blue-600">Med</span><span className="text-green-600">Care</span></h1>
             <p className="text-2xl sm:text-3xl md:text-4xl text-gray-700 pb-8 md:pb-10">Your Health, Our Priority</p>
@@ -72,7 +72,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative w-full h-64 sm:h-80 md:h-full flex items-end justify-center md:justify-end z-10">
+        <div className="relative w-full h-64 sm:h-80 md:h-full flex items-end justify-center md:justify-end z-1">
           <Image  
             src="/DoctorPhoto.png" 
             alt="Doctor" 
@@ -93,7 +93,7 @@ export default function Home() {
             <span className="pl-4 text-xl md:text-2xl text-gray-700 dark:text-white">Opening Hours</span>
           </Link>
 
-          <Link href="/services" className="autoShow flex flex-row items-center justify-center py-4 md:py-0 md:h-15 bg-white dark:bg-slate-800 rounded-xl border border-gray-400 cursor-pointer hover:bg-green-200 dark:hover:bg-green-900 hover:border-green-800 transition">
+          <Link href="/services" className="autoShow z-10 flex flex-row items-center justify-center py-4 md:py-0 md:h-15 bg-white dark:bg-slate-800 rounded-xl border border-gray-400 cursor-pointer hover:bg-green-200 dark:hover:bg-green-900 hover:border-green-800 transition">
             <Image src="/Services.png" alt="Icone" width={20} height={20} style={{ width: 'auto', height: 'auto' }} />
             <span className="pl-4 text-xl md:text-2xl text-gray-700 dark:text-white">Our Services</span>
           </Link>

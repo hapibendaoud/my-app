@@ -24,3 +24,20 @@ body{
         transform: translateY(0) scale(1);
     }
 }
+/* تحسين شكل السكرول بار داخل الكارد */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1; /* لون رمادي خفيف */
+    border-radius: 10px;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #475569; /* لون يتناسب مع الوضع الداكن */
+}

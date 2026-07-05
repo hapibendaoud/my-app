@@ -61,23 +61,17 @@ export default function Register() {
     }
   };
 
-
-
-
-
-
   return (
-    <section className="h-screen bg-slate-100 dark:bg-slate-950 flex items-center justify-center p-4">
-      {/* بدلت w-87 لـ w-full max-w-md باش تهز المعلومات كاملة وتجي متناسقة فالشاشات كاملين */}
-      <div className="bg-white dark:bg-slate-800 shadow-lg rounded-2xl p-8 w-full max-w-md text-center max-h-[95vh]">
+    <section className="min-h-screen bg-slate-100 dark:bg-slate-950 flex items-center justify-center p-4">
+      {/* تم تحسين الكارد هنا ليتناسب مع الشاشات الصغيرة والمتوسطة عبر إضافة التمرير الذكي عند الحاجة */}
+      <div className="bg-white dark:bg-slate-800 shadow-lg rounded-2xl p-6 sm:p-8 w-full max-w-md text-center max-h-[95vh] flex flex-col overflow-y-auto custom-scrollbar">
 
         <h2 className="text-2xl dark:text-white font-bold mb-1">Create Account</h2>
         <p className="text-gray-500 dark:text-gray-300 mb-5 text-sm">Register a new patient account</p>
 
         <form 
-          type="submit"
           onSubmit={handleSubmit}
-          className="space-y-4 text-left">
+          className="space-y-4 text-left flex-1">
           
           {/* الاسم الكامل */}
           <div>
@@ -128,10 +122,9 @@ export default function Register() {
             />
           </div>
 
-          {/* الجنس (اضافي ومهم للملف الطبي) */}
+          {/* الجنس */}
           <div>
-            <label
-              className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1 ml-1">Gender</label>
+            <label className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1 ml-1">Gender</label>
             <select 
               value={gender}
               onChange={(e) => setGender(e.target.value)}
@@ -158,15 +151,14 @@ export default function Register() {
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition font-medium text-sm mt-2" 
-            
           >
             Register Patient
           </button>
         </form>
 
-        <p className="text-sm text-gray-500 ">
+        <p className="text-sm text-gray-500 mt-4">
           Already have an account?{" "}
-          <Link href="/login" className="text-blue-600 font-medium hover:underline">
+          <Link href="/login" className="text-blue-600 font-medium hover:underline pl-1">
             Login
           </Link>
         </p>
