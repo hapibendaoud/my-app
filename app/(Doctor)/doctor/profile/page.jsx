@@ -1,27 +1,56 @@
 "use client";
 
 import React, { useState } from "react";
+import { useDoctor } from "@/context/DoctorContext";
 
 export default function DoctorProfile() {
   // 1. حالة التعديل
   const [isEditing, setIsEditing] = useState(false);
 
+const { profile, setProfile, tempProfile, setTempProfile, loading } = useDoctor();
+if (loading) return <p className="p-5 text-center">Loading...</p>;
   // 2. بيانات الدكتور الحالية
-  const [profile, setProfile] = useState({
-    firstName: "Laila",
-    lastName: "Bensouda",
-    email: "dr.bensouda@clinic.com",
-    phone: "+212 661-998877",
-    specialty: "Cardiologist - General Medicine",
-    licenseNumber: "MD-2026-9941",
-    experience: "12 Years",
-    clinicAddress: "Anfa Boulevard, Twin Center, Floor 5, Casablanca",
-    bio: "Specialized in non-invasive cardiology, heart failure management, and advanced cardiovascular imaging. Passionate about preventative heart care.",
-    consultationFee: "300 DH",
-  });
+  // const [profile, setProfile] = useState({
+  //   // fullName: "",
+  //   // phone: "",
+  //   // specialty: "Cardiologist - General Medicine",
+  //   // licenseNumber: "MD-2026-9941",
+  //   // experience: "12 Years",
+  //   // clinicAddress: "Anfa Boulevard, Twin Center, Floor 5, Casablanca",
+  //   // bio: "Specialized in non-invasive cardiology, heart failure management, and advanced cardiovascular imaging. Passionate about preventative heart care.",
+  //   // consultationFee: "300 DH",
+  // });
+
+  // React.useEffect(() => {
+
+  // const getDoctorProfile = async () => {
+  //   try {
+  //     const response = await fetch(`/api/patients/doctors/${doctorId}`, {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error("Failed to fetch doctor profile");
+  //     }
+
+  //     const data = await response.json();
+  //     setProfile(data);
+  //     setTempProfile(data);
+      
+  //     } catch (error) {
+  //       console.error("Error fetching doctor profile:", error);
+  //     }
+  //   };
+  //   getDoctorProfile();
+  // }, []);
+    // console.log("Fetched doctor profile:", profile);
+
 
   // 3. حالة مؤقتة للتعديلات
-  const [tempProfile, setTempProfile] = useState({ ...profile });
+  // const [tempProfile, setTempProfile] = useState({ ...profile });
 
   const handleChange = (e) => {
     setTempProfile({ ...tempProfile, [e.target.name]: e.target.value });
@@ -35,10 +64,10 @@ export default function DoctorProfile() {
   };
 
   const handleCancel = () => {
-    setTempProfile({ ...profile });
+    setTempProfile({ ...profile.doctor });
     setIsEditing(false);
   };
-
+  console.log("Doctor profile data:", profile);
   return (
     <div className="min-h-screen bg-gray-200 dark:bg-slate-950 text-slate-100 p-4 md:p-10 flex justify-center items-start">
       <div className="max-w-4xl w-full bg-gray-200 dark:bg-slate-900/40 border border-gray-300 dark:border-slate-800/80 rounded-2xl shadow-xl overflow-hidden">
@@ -50,8 +79,8 @@ export default function DoctorProfile() {
               Dr
             </div>
             <div className="mb-2">
-              <h1 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Dr. {profile.firstName} {profile.lastName}</h1>
-              <p className="text-xs text-blue-600 dark:text-teal-300 font-medium">{profile.specialty}</p>
+              <h1 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Dr. {profile?.fullName}</h1>
+              <p className="text-xs text-blue-600 dark:text-teal-300 font-medium">{profile?.specialization || ""}</p>
             </div>
           </div>
         </div>
@@ -99,7 +128,7 @@ export default function DoctorProfile() {
                   type="text"
                   name="specialty"
                   disabled={!isEditing}
-                  value={tempProfile.specialty}
+                  value={tempProfile.specialization || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-300 dark:bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-gray-600 dark:text-slate-200 transition"
                 />
@@ -110,7 +139,7 @@ export default function DoctorProfile() {
                   type="text"
                   name="licenseNumber"
                   disabled={true} // رخصة الطبيب غالباً كتبقى مقفولة ومكتبدلش لدواعي أمنية
-                  value={tempProfile.licenseNumber}
+                  value={tempProfile.licenseNumber || ""}
                   className="w-full bg-gray-300 dark:bg-slate-950/40 border border-slate-800/40 rounded-xl p-3 text-slate-500 cursor-not-allowed"
                 />
               </div>
@@ -120,7 +149,7 @@ export default function DoctorProfile() {
                   type="text"
                   name="experience"
                   disabled={!isEditing}
-                  value={tempProfile.experience}
+                  value={tempProfile.experience || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-300 dark:bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-slate-200 transition"
                 />
@@ -131,7 +160,7 @@ export default function DoctorProfile() {
                   type="text"
                   name="consultationFee"
                   disabled={!isEditing}
-                  value={tempProfile.consultationFee}
+                  value={tempProfile?.consultationFee || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-300 dark:bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-amber-400 font-bold transition"
                 />
@@ -142,7 +171,7 @@ export default function DoctorProfile() {
                   type="text"
                   name="clinicAddress"
                   disabled={!isEditing}
-                  value={tempProfile.clinicAddress}
+                  value={tempProfile?.clinicAddress || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-300 dark:bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-slate-200 transition"
                 />
@@ -162,7 +191,7 @@ export default function DoctorProfile() {
                   type="email"
                   name="email"
                   disabled={!isEditing}
-                  value={tempProfile.email}
+                  value={tempProfile?.email || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-300 dark:bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-blue-500 disabled:opacity-60 text-slate-200 transition"
                 />
@@ -173,7 +202,7 @@ export default function DoctorProfile() {
                   type="text"
                   name="phone"
                   disabled={!isEditing}
-                  value={tempProfile.phone}
+                  value={tempProfile?.phoneNumber || ""}
                   onChange={handleChange}
                   className="w-full bg-gray-300 dark:bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-blue-500 disabled:opacity-60 text-slate-200 transition"
                 />
@@ -183,7 +212,7 @@ export default function DoctorProfile() {
                 <textarea
                   name="bio"
                   disabled={!isEditing}
-                  value={tempProfile.bio}
+                  value={tempProfile?.bio || ""}
                   onChange={handleChange}
                   rows="3"
                   className="w-full bg-gray-300 dark:bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-blue-500 disabled:opacity-60 text-slate-300 transition resize-none leading-relaxed"

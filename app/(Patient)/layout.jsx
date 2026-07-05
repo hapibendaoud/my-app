@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Adnavbar from "@/components/Patientnavbar/navbar";
 import Footer from "@/components/footer/footer"
 import "@/app/globals.css";
+import { DoctorProvider } from "@/context/DoctorContext";
 
 
 const geistSans = Geist({
@@ -25,9 +26,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-slate-950`}
       >
-        <Adnavbar/>
-        {children}
-        <Footer/>
+        <DoctorProvider>
+          <Adnavbar/>
+          {children}
+          <Footer/>
+        </DoctorProvider>
       </body>
     </html>
   );

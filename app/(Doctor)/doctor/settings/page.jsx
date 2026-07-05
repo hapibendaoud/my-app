@@ -124,9 +124,15 @@
     // دالة تسجيل الخروج
     const handleLogout = () => {
         const confirmLogout = window.confirm("Are you sure you want to log out?");
-        if (confirmLogout) {
-        // الكود الخاص بـ Auth يوضع هنا
-        alert("Logging out...");
+        if (confirm("Do you want to log out?")) {
+            // 1. مسح التوكن من الـ Cookies نهائياً
+            Cookies.remove('token'); 
+
+            // 3. صيفط المستخدم لصفحة الـ login
+            router.push('/login');
+            
+            // 4. (إختياري) كتدير ريفريش خفيف باش كاع الـ Components يعاودو الراندر بلا بيانات المستخدم
+            router.refresh();
         }
     };
 

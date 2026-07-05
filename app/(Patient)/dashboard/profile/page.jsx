@@ -1,26 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
+import { useDoctor } from "@/context/DoctorContext";
+
+
 
 export default function PatientProfile() {
   // 1. حالة التعديل (واش اليوزر كيشوف ولا كيعدل)
   const [isEditing, setIsEditing] = useState(false);
-
-  // 2. بيانات المريض الحالية
-  const [profile, setProfile] = useState({
-    firstName: "Said",
-    lastName: "Ait Bendaoud",
-    email: "said.aitbendaoud@email.com",
-    phone: "+212 612-345678",
-    birthDate: "1992-05-14",
-    gender: "Male",
-    bloodType: "O+",
-    allergies: "Penicillin, Peanuts",
-    emergencyContact: "Fatima Alami (Wife) - +212 611-998877",
-  });
-
-  // 3. حالة مؤقتة لتخزين التعديلات قبل الحفظ
-  const [tempProfile, setTempProfile] = useState({ ...profile });
+  const { profile, setProfile, tempProfile, setTempProfile, loading } = useDoctor();
+  if (loading) return <p className="p-5 text-center">Loading...</p>;
 
   // دالة التعامل مع تغيير المدخلات (Inputs)
   const handleChange = (e) => {
@@ -37,7 +26,7 @@ export default function PatientProfile() {
 
   // دالة إلغاء التعديل ورجوع البيانات كما كانت
   const handleCancel = () => {
-    setTempProfile({ ...profile });
+    setTempProfile({ ...profiledoctor });
     setIsEditing(false);
   };
 
@@ -46,14 +35,14 @@ export default function PatientProfile() {
       <div className="max-w-4xl w-full bg-slate-900/40 border border-slate-800/80 rounded-2xl shadow-xl overflow-hidden">
         
         {/* هيدر البروفايل (الخلفية العلوية والرمز) */}
-        <div className="h-32 bg-gradient-to-r from-blue-600 to-teal-500 relative">
+        <div className="h-32 bg-linear-to-r from-blue-600 to-teal-500 relative">
           <div className="absolute -bottom-12 left-6 md:left-10 flex items-end space-x-4 space-x-reverse">
             <div className="w-24 h-24 bg-slate-900 border-4 border-slate-950 rounded-2xl flex items-center justify-center text-3xl font-bold text-teal-400 shadow-xl">
-              {profile.firstName[0]}{profile.lastName[0]}
+              {profile.fullName[0]}
             </div>
             <div className="mb-2">
-              <h1 className="text-xl md:text-2xl font-bold text-white">{profile.firstName} {profile.lastName}</h1>
-              <p className="text-xs text-slate-200/80">Patient Account #MED-9482</p>
+              <h1 className="text-xl md:text-2xl font-bold text-white">{profile.fullName}</h1>
+              <p className="text-xs text-slate-200/80">Patient Account {profile.patientId}</p>
             </div>
           </div>
         </div>
@@ -76,7 +65,7 @@ export default function PatientProfile() {
               <div className="flex gap-2">
                 <button
                   type="submit"
-                  className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-400 hover:to-blue-500 text-slate-950 font-bold py-2 px-4 rounded-xl text-sm transition shadow-lg"
+                  className="bg-linear-to-r from-teal-500 to-blue-600 hover:from-teal-400 hover:to-blue-500 text-slate-950 font-bold py-2 px-4 rounded-xl text-sm transition shadow-lg"
                 >
                   Save
                 </button>
@@ -101,18 +90,7 @@ export default function PatientProfile() {
                   type="text"
                   name="firstName"
                   disabled={!isEditing}
-                  value={tempProfile.firstName}
-                  onChange={handleChange}
-                  className="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-slate-200 transition"
-                />
-              </div>
-              <div>
-                <label className="block text-slate-400 mb-1.5">Last Name</label>
-                <input
-                  type="text"
-                  name="lastName"
-                  disabled={!isEditing}
-                  value={tempProfile.lastName}
+                  value={tempProfile.fullName || ''}
                   onChange={handleChange}
                   className="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-slate-200 transition"
                 />
@@ -123,7 +101,7 @@ export default function PatientProfile() {
                   type="email"
                   name="email"
                   disabled={!isEditing}
-                  value={tempProfile.email}
+                  value={tempProfile.email || ''}
                   onChange={handleChange}
                   className="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-slate-200 transition"
                 />
@@ -134,7 +112,7 @@ export default function PatientProfile() {
                   type="text"
                   name="phone"
                   disabled={!isEditing}
-                  value={tempProfile.phone}
+                  value={tempProfile.phone || ''}
                   onChange={handleChange}
                   className="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-slate-200 transition"
                 />
@@ -145,7 +123,7 @@ export default function PatientProfile() {
                   type="date"
                   name="birthDate"
                   disabled={!isEditing}
-                  value={tempProfile.birthDate}
+                  value={tempProfile.birthDate || ''}
                   onChange={handleChange}
                   className="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-slate-200 transition"
                 />
@@ -155,7 +133,7 @@ export default function PatientProfile() {
                 <select
                   name="gender"
                   disabled={!isEditing}
-                  value={tempProfile.gender}
+                  value={tempProfile.gender || ''}
                   onChange={handleChange}
                   className="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-slate-200 transition appearance-none"
                 >
@@ -178,7 +156,7 @@ export default function PatientProfile() {
                   type="text"
                   name="bloodType"
                   disabled={!isEditing}
-                  value={tempProfile.bloodType}
+                  value={tempProfile.bloodType || ''}
                   onChange={handleChange}
                   placeholder="e.g., A+, O-"
                   className="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-rose-500 disabled:opacity-60 text-rose-400 font-bold transition text-center"
@@ -190,7 +168,7 @@ export default function PatientProfile() {
                     type="text"
                     name="allergies"
                     disabled={!isEditing}
-                    value={tempProfile.allergies}
+                    value={tempProfile.allergies || ''}
                     onChange={handleChange}
                     placeholder="None"
                     className="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-rose-500 disabled:opacity-60 text-slate-200 transition"
@@ -202,7 +180,7 @@ export default function PatientProfile() {
                     type="text"
                     name="emergencyContact"
                     disabled={!isEditing}
-                    value={tempProfile.emergencyContact}
+                    value={tempProfile.emergencyContact || ''}
                     onChange={handleChange}
                     className="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-slate-200 transition"
                 />

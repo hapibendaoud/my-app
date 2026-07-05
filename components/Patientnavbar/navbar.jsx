@@ -1,39 +1,139 @@
-"use client";
-import Image from "next/image";
-import Link from "next/link";
-import TextBorderAnimation from "@/components/animata/text/text-border-animation";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+    "use client";
+    import Image from "next/image";
+    import Link from "next/link";
+    import TextBorderAnimation from "@/components/animata/text/text-border-animation";
+    import { usePathname } from "next/navigation";
+    import { useState } from "react";
+    import { useDoctor } from "@/context/DoctorContext";
 
-export default function Navbar(){
+    export default function Navbar() {
     const pathname = usePathname();
-    const [patientInfo] = useState({
-        id: "MED-9482",
-        name: "Said Ait Bendaoud",
-        });
+    const { profile } = useDoctor();
+    // حالة التحكم في القائمة الجانبية للموبايل
+    const [isOpen, setIsOpen] = useState(false);
+
     const isActive = (path) => pathname === path;
-return(
-    <div className="bg-white dark:bg-slate-900  items-center flex justify-between w-full h-20 px-10 shadow-lg fixed top-0 z-40">
-        <div className="flex items-center justify-center cursor-pointer w-33.33% h-full pl-4 pt-0.5"> 
-            <Link href={"/dashboard"}><Image src="/logo.png" alt="logo" width={200} height={200} priority className="w-auto h-auto"/></Link>
-        </div>
-        <div className=" flex justify-around gap-8 h-full items-center w-33.33%">
-            <Link href={"/dashboard"}><div className="cursor-pointer text-gray-700  py-7"><TextBorderAnimation text="Home" className={`${isActive("/dashboard") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-white"}`}/></div></Link>
-            <Link href={"/dashboard/about"}><div className="cursor-pointer text-gray-700 py-7"><TextBorderAnimation text="About" className={`${isActive("/dashboard/about") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-white"}`}/></div></Link>
-            <Link href={"/dashboard/services"}><div className="cursor-pointer text-gray-700 py-7"><TextBorderAnimation text="Services" className={`${isActive("/dashboard/services") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-white"}`}/></div></Link>
-            <Link href={"/dashboard/contact"}><div className="cursor-pointer text-gray-700 py-7"><TextBorderAnimation text="Contact" className={`${isActive("/dashboard/contact") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-white"}`}  /></div></Link>
-        </div>
-        <div className="flex items-center gap-5 w-33.33%">
-            <div>
-                <h1 className="text-gray-700 font-bold text-2xl dark:text-white">{patientInfo.name}</h1>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Patient ID: {patientInfo.id}</p>
+
+    const getInitials = () => {
+        if (!profile?.fullName) return "P";
+        return profile.fullName.split(" ").map(n => n[0]).join("").toUpperCase();
+    };
+
+    return (
+        <>
+        {/* الـ Navbar الرئيسي */}
+        <div className="bg-white dark:bg-slate-900 items-center flex justify-between w-full h-20 px-4 sm:px-6 md:px-10 shadow-lg fixed top-0 z-40">
+            
+            {/* 1. اللوجو */}
+            <div className="flex items-center cursor-pointer h-full">
+            <Link href={"/dashboard"}>
+                <Image 
+                src="/logo.png" 
+                alt="logo" 
+                width={160} 
+                height={160} 
+                priority 
+                className="w-32 sm:w-40 h-auto"
+                style={{ width: 'auto', height: 'auto' }}
+                />
+            </Link>
             </div>
-            <Link href={"/dashboard/profile"}>
-                <div className="w-14 h-14 bg-gradient-to-tr from-blue-500 to-teal-400 rounded-full flex items-center justify-center text-xl font-bold text-slate-950 shadow-inner">
-                    {patientInfo.name.split(" ").map(n => n[0]).join("")}
+
+            {/* 2. القائمة للشاشات الكبيرة (تختفي في الموبايل md:flex) */}
+            <div className="hidden md:flex justify-around gap-6 lg:gap-8 h-full items-center">
+            <Link href={"/dashboard"}>
+                <div className="cursor-pointer text-gray-700 py-7">
+                <TextBorderAnimation text="Home" className={`${isActive("/dashboard") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-white"}`} />
                 </div>
             </Link>
+            <Link href={"/dashboard/about"}>
+                <div className="cursor-pointer text-gray-700 py-7">
+                <TextBorderAnimation text="About" className={`${isActive("/dashboard/about") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-white"}`} />
+                </div>
+            </Link>
+            <Link href={"/dashboard/services"}>
+                <div className="cursor-pointer text-gray-700 py-7">
+                <TextBorderAnimation text="Services" className={`${isActive("/dashboard/services") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-white"}`} />
+                </div>
+            </Link>
+            <Link href={"/dashboard/contact"}>
+                <div className="cursor-pointer text-gray-700 py-7">
+                <TextBorderAnimation text="Contact" className={`${isActive("/dashboard/contact") ? "text-blue-600 font-bold" : "text-gray-700 dark:text-white"}`} />
+                </div>
+            </Link>
+            </div>
+
+            {/* 3. معلومات المريض وزر البرجر */}
+            <div className="flex items-center gap-3 sm:gap-5">
+            {/* بيانات المريض النصية تظهر فقط في الشاشات الكبيرة */}
+            <div className="hidden md:block text-right">
+                <h1 className="text-gray-700 font-bold text-base lg:text-lg dark:text-white truncate max-w-37.5">
+                {profile?.fullName || "Patient"}
+                </h1>
+                <p className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-37.5">
+                ID: {profile?._id}
+                </p>
+            </div>
+            
+            {/* صورة البروفايل الدائرية */}
+            <Link href={"/dashboard/profile"}>
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-linear-to-tr from-blue-500 to-teal-400 rounded-full flex items-center justify-center text-sm sm:text-base font-bold text-slate-950 shadow-inner shrink-0">
+                {getInitials()}
+                </div>
+            </Link>
+
+            {/* زر البرجر للموبايل */}
+            <button 
+                onClick={() => setIsOpen(!isOpen)}
+                className="md:hidden p-2 text-gray-700 dark:text-white focus:outline-none"
+                aria-label="Toggle Menu"
+            >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                )}
+                </svg>
+            </button>
+            </div>
         </div>
-    </div>
-)
-}
+
+        {/* قائمة الموبايل المنسدلة */}
+        {isOpen && (
+            <div className="fixed inset-x-0 top-20 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 shadow-xl md:hidden z-30 animate-in slide-in-from-top duration-200">
+            <div className="flex flex-col p-4 space-y-2 font-semibold text-sm">
+                <Link 
+                href={"/dashboard"} 
+                onClick={() => setIsOpen(false)}
+                className={`p-3 rounded-xl transition ${isActive("/dashboard") ? "bg-blue-50 dark:bg-blue-950/40 text-blue-600" : "text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800"}`}
+                >
+                Home
+                </Link>
+                <Link 
+                href={"/dashboard/about"} 
+                onClick={() => setIsOpen(false)}
+                className={`p-3 rounded-xl transition ${isActive("/dashboard/about") ? "bg-blue-50 dark:bg-blue-950/40 text-blue-600" : "text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800"}`}
+                >
+                About
+                </Link>
+                <Link 
+                href={"/dashboard/services"} 
+                onClick={() => setIsOpen(false)}
+                className={`p-3 rounded-xl transition ${isActive("/dashboard/services") ? "bg-blue-50 dark:bg-blue-950/40 text-blue-600" : "text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800"}`}
+                >
+                Services
+                </Link>
+                <Link 
+                href={"/dashboard/contact"} 
+                onClick={() => setIsOpen(false)}
+                className={`p-3 rounded-xl transition ${isActive("/dashboard/contact") ? "bg-blue-50 dark:bg-blue-950/40 text-blue-600" : "text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800"}`}
+                >
+                Contact
+                </Link>
+            </div>
+            </div>
+        )}
+        </>
+    );
+    }
