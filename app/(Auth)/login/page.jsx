@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
 export default function Login() {
-
+  const URL = "https://my-app-backend-qm7ic75no-hapibendaouds-projects.vercel.app/";
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +22,7 @@ export default function Login() {
 
       try {
         // 2. كنصيفطو الـ Fetch Request
-        const response = await fetch("/api/patients/login", {
+        const response = await fetch(`${URL}/api/patients/login`, {
           method: "POST", 
           headers: {
             "Content-Type": "application/json",
@@ -39,13 +39,17 @@ export default function Login() {
           Cookies.set("token", res.token, { expires: 7 });
           Cookies.set("role", res.role, { expires: 7 });
           alert(res.message);
-          console.log("Token:", res.token);
-          console.log("Role:", res.role);
 
           // Reset form fields after submission
           setEmail("");
           setPassword("");
-          // router.push("/dashboard");
+          if(res.role === "patient") {
+            router.push("/dashboard");
+          } else if(res.role === "doctor") {
+            router.push("/doctor");
+          } else {
+            alert("Unknown role. Please contact support.");
+          }
         } else {
           alert(res.message);
           emailRef.current.focus();

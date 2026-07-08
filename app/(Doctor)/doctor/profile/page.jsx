@@ -4,53 +4,16 @@ import React, { useState } from "react";
 import { useDoctor } from "@/context/DoctorContext";
 
 export default function DoctorProfile() {
+
+
+  // const URL = "https://my-app-backend-qm7ic75no-hapibendaouds-projects.vercel.app/";
+
   // 1. حالة التعديل
   const [isEditing, setIsEditing] = useState(false);
 
 const { profile, setProfile, tempProfile, setTempProfile, loading } = useDoctor();
 if (loading) return <p className="p-5 text-center">Loading...</p>;
-  // 2. بيانات الدكتور الحالية
-  // const [profile, setProfile] = useState({
-  //   // fullName: "",
-  //   // phone: "",
-  //   // specialty: "Cardiologist - General Medicine",
-  //   // licenseNumber: "MD-2026-9941",
-  //   // experience: "12 Years",
-  //   // clinicAddress: "Anfa Boulevard, Twin Center, Floor 5, Casablanca",
-  //   // bio: "Specialized in non-invasive cardiology, heart failure management, and advanced cardiovascular imaging. Passionate about preventative heart care.",
-  //   // consultationFee: "300 DH",
-  // });
 
-  // React.useEffect(() => {
-
-  // const getDoctorProfile = async () => {
-  //   try {
-  //     const response = await fetch(`/api/patients/doctors/${doctorId}`, {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error("Failed to fetch doctor profile");
-  //     }
-
-  //     const data = await response.json();
-  //     setProfile(data);
-  //     setTempProfile(data);
-      
-  //     } catch (error) {
-  //       console.error("Error fetching doctor profile:", error);
-  //     }
-  //   };
-  //   getDoctorProfile();
-  // }, []);
-    // console.log("Fetched doctor profile:", profile);
-
-
-  // 3. حالة مؤقتة للتعديلات
-  // const [tempProfile, setTempProfile] = useState({ ...profile });
 
   const handleChange = (e) => {
     setTempProfile({ ...tempProfile, [e.target.name]: e.target.value });

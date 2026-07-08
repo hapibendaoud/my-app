@@ -5,6 +5,7 @@
     import { usePathname } from "next/navigation";
     import { useState } from "react";
     import { useDoctor } from "@/context/DoctorContext";
+    import Cookies from "js-cookie";
 
     export default function Navbar() {
     const pathname = usePathname();
@@ -18,6 +19,21 @@
     const getInitials = () => {
         if (!profile?.fullName) return "Dr";
         return profile.fullName.split(" ").map(n => n[0]).join("").toUpperCase();
+    };
+
+    const handleLogout = () => {
+        const confirmLogout = window.confirm("Are you sure you want to log out?");
+        if (confirmLogout) {
+            // 1. مسح التوكن من الـ Cookies نهائياً
+            Cookies.remove('token'); 
+            Cookies.remove('role');
+
+            // 3. صيفط المستخدم لصفحة الـ login
+            router.push('/login');
+            
+            // 4. (إختياري) كتدير ريفريش خفيف باش كاع الـ Components يعاودو الراندر بلا بيانات المستخدم
+            router.refresh();
+        }
     };
 
     return (
@@ -74,6 +90,25 @@
                 {getInitials()}
                 </div>
             </Link> 
+
+            <div className="flex items-center">
+                <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="flex items-center gap-1.5 bg-rose-50/50 hover:bg-rose-600 text-rose-600 hover:text-white border border-rose-200 dark:bg-rose-950/20 dark:border-rose-900/40 dark:text-rose-400 dark:hover:bg-rose-600 dark:hover:text-white font-semibold text-xs sm:text-sm py-1.5 px-3.5 rounded-lg transition-all duration-200 shadow-2xs cursor-pointer"
+                >
+                    {/* أيقونة خروج بسيطة تعطي لمسة احترافية للـ Navbar */}
+                    <svg 
+                    className="w-4 h-4" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    viewBox="0 0 24 24"
+                    >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+                </button>
+            </div>
 
             {/* زر قائمة الموبايل (يظهر فقط في الشاشات الصغيرة) */}
             <button 

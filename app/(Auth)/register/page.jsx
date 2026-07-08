@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 export default function Register() {
 
+  const URL = "https://my-app-backend-qm7ic75no-hapibendaouds-projects.vercel.app/";
   const router = useRouter();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ export default function Register() {
 
     try {
       // 2. كنصيفطو الـ Fetch Request
-      const response = await fetch("/api/patients/register", {
+      const response = await fetch(`${URL}/api/patients/register`, {
         method: "POST", // 👈 رجعناها POST ماشي GET
         headers: {
           "Content-Type": "application/json",

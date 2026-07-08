@@ -1,9 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Profiler } from "react";
+import { useDoctor } from "@/context/DoctorContext";
 import Cookies from "js-cookie";  
 
 export default function DoctorDashboard() {
+
+  const URL = "https://my-app-backend-qm7ic75no-hapibendaouds-projects.vercel.app/";
+
   // 1. إحصائيات سريعة خاصة بالطبيب
   const [stats, setStats] = useState({
     totalPatients: 0,
@@ -13,6 +17,8 @@ export default function DoctorDashboard() {
 
   // 2. بيانات المواعيد والمرضى الخاصة بالطبيب ليومنا هذا
   const [appointments, setAppointments] = useState([]);
+  const { profile, loading } = useDoctor();
+
 
   // 3. المريض اللي كليك عليه الدكتور باش يشوف معلوماته التفصيلية
   const [selectedPatient, setSelectedPatient] = useState(null);
@@ -31,7 +37,7 @@ export default function DoctorDashboard() {
   useEffect(() => { 
     async function getAppointments() {
       try {
-        const response = await fetch("/api/patients/appointments", {
+        const response = await fetch(`${URL}/api/patients/appointments`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -89,7 +95,7 @@ export default function DoctorDashboard() {
       }
 
       try {
-        const response = await fetch(`/api/patients/appointments/${id}/status-update`, {
+        const response = await fetch(`${URL}/api/patients/appointments/${id}/status-update`, {
           method: "PATCH", 
           headers: {
             "Content-Type": "application/json",
@@ -127,7 +133,7 @@ export default function DoctorDashboard() {
       }
 
       try {
-        await fetch(`/api/patients/appointments/${id}/status-update`, {
+        await fetch(`${URL}/api/patients/appointments/${id}/status-update`, {
           method: "PATCH", 
           headers: {
             "Content-Type": "application/json",
@@ -199,7 +205,8 @@ export default function DoctorDashboard() {
           <div className="space-y-4 text-sm">
             <div>
               <label className="text-xs text-gray-600 dark:text-slate-500 block mb-1">Reason for Visit</label>
-              <div className="bg-gray-300 dark:bg-slate-950 p-3 rounded-xl border border-gray-300 dark:border-slate-800 font-medium text-gray-700 dark:text-slate-300 wrap-break-words">
+              {/* تم استبدال wrap-break-words بـ break-words مع إضافة overflow-hidden */}
+              <div className="bg-gray-300 dark:bg-slate-950 p-3 rounded-xl border border-gray-300 dark:border-slate-800 font-medium text-gray-700 dark:text-slate-300 wrap-break-word overflow-hidden">
                 <span className="text-blue-500 font-bold">{selectedPatient?.visitType}</span> - {selectedPatient?.reason || "No specified reason"}
               </div>
             </div>
@@ -235,7 +242,7 @@ export default function DoctorDashboard() {
       {/* الهيدر ترحيبي بالدكتور */}
       <div className="mb-8">
         <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-blue-600">
-          Welcome Back, Dr. Bensouda
+          Welcome Back, Dr. {profile?.fullName}
         </h1>
         <p className="text-gray-700 dark:text-slate-400 text-xs sm:text-sm mt-1">Here is your schedule and patient overview for today.</p>
       </div>

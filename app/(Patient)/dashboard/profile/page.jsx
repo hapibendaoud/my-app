@@ -26,8 +26,23 @@ export default function PatientProfile() {
 
   // دالة إلغاء التعديل ورجوع البيانات كما كانت
   const handleCancel = () => {
-    setTempProfile({ ...profiledoctor });
+    setTempProfile({ ...profile });
     setIsEditing(false);
+  };
+
+      // دالة تسجيل الخروج
+  const handleLogout = () => {
+      const confirmLogout = window.confirm("Are you sure you want to log out?");
+      if (confirm("Do you want to log out?")) {
+          // 1. مسح التوكن من الـ Cookies نهائياً
+          Cookies.remove('token'); 
+
+          // 3. صيفط المستخدم لصفحة الـ login
+          router.push('/login');
+          
+          // 4. (إختياري) كتدير ريفريش خفيف باش كاع الـ Components يعاودو الراندر بلا بيانات المستخدم
+          router.refresh();
+      }
   };
 
   return (
@@ -123,7 +138,7 @@ export default function PatientProfile() {
                   type="date"
                   name="birthDate"
                   disabled={!isEditing}
-                  value={tempProfile.birthDate || ''}
+                  value={tempProfile.birthDate ? tempProfile.birthDate.split('T')[0] : ''}
                   onChange={handleChange}
                   className="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-slate-200 transition"
                 />
@@ -180,7 +195,7 @@ export default function PatientProfile() {
                     type="text"
                     name="emergencyContact"
                     disabled={!isEditing}
-                    value={tempProfile.emergencyContact || ''}
+                    value={tempProfile.emergencyContact || 'None'}
                     onChange={handleChange}
                     className="w-full bg-slate-950/60 border border-slate-800 rounded-xl p-3 focus:outline-none focus:border-teal-500 disabled:opacity-60 text-slate-200 transition"
                 />
@@ -189,6 +204,15 @@ export default function PatientProfile() {
             </div>
 
         </form>
+        <div className="max-w-4xl w-full flex justify-end px-2 mb-6 pr-10">
+            <button
+            type="button"
+            onClick={handleLogout}
+            className="bg-transparent hover:bg-rose-600 text-rose-600 hover:text-white border border-rose-500/40 font-bold text-xs py-2 px-5 rounded-xl transition shadow-xs"
+            >
+            Logout
+            </button>
+        </div>
         </div>
     </div>
     );

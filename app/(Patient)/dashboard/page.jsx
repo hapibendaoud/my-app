@@ -20,7 +20,7 @@
     useEffect(() => { 
         async function getAppointments() {
         try {
-            const response = await fetch("/api/patients/appointments", {
+            const response = await fetch("/api/patients/myappointments", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -33,7 +33,7 @@
             if (response.ok) {
             setAppointments(data);
             } else {
-            console.error("Server error:", data.message);
+            console.log("Server error:", data.message);
             }
 
         } catch (error) {
