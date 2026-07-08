@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
 const DoctorContext = createContext();
-
+const URL = "";
 // 💡 تأكد من وجود كلمة export هنا الفوق
 export function DoctorProvider({ children }) {
     const [profile, setProfile] = useState(null);
@@ -14,7 +14,7 @@ export function DoctorProvider({ children }) {
     useEffect(() => {
         const getProfileInfo = async () => {
         try {
-            const response = await fetch(`/api/patients/doctorOrPatient`, {
+            const response = await fetch(`${URL}/api/patients/doctorOrPatient`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

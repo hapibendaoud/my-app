@@ -6,8 +6,10 @@
     import { useState } from "react";
     import { useDoctor } from "@/context/DoctorContext";
     import Cookies from "js-cookie";
+    import { useRouter } from "next/navigation";
 
     export default function Navbar() {
+    const router = useRouter();
     const pathname = usePathname();
     const { profile } = useDoctor();
     // حالة للتحكم في فتح وإغلاق قائمة الموبايل

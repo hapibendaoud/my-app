@@ -1,45 +1,49 @@
 import { NextResponse } from 'next/server';
-import Cookies from 'js-cookie';
-
-
 
 export function middleware(request) {
-  // 1. كيشوف التوكن والـ Role من الكوكيز
-    const token = request.cookies.get('token')?.value
-    const userRole = request.cookies.get('role')?.value // يقدر يكون 'doctor' أو 'patient'
+    const token = request.cookies.get('token')?.value;
+    const userRole = request.cookies.get('role')?.value;
     
-    const { pathname } = request.nextUrl
+    const { pathname } = request.nextUrl;
 
-    // 2. يلا ما كاينش التوكن وبغا يدخل لشي صفحة محمية (ديال الدكتور أو المريض)
+    // 1. إذا لم يكن هناك توكن
     if (!token) {
-        if (pathname.startsWith('/doctor') || pathname.startsWith('/patient') || pathname.startsWith('/dashboard')) {
-        return NextResponse.redirect(new URL('/login', request.url))
+        if (pathname.startsWith('/doctor') || pathname === '/dashboard') {
+            return NextResponse.redirect(new URL('/login', request.url));
         }
     }
 
-    // 3. يلا هو ديجا مسجل الدخول
+    // 2. إذا كان هناك توكن
     if (token) {
-        // يلا بغا يدخل لصفحة login وهو ديجا داخل، كنصيفطوه على حساب الـ Role ديالو
-        if (pathname === '/login' || pathname === '/register') {
-        if (userRole === 'doctor') {
-            return NextResponse.redirect(new URL('/doctor/dashboard', request.url))
-        }
-        return NextResponse.redirect(new URL('/patient/dashboard', request.url))
+        // حماية ضد التلاعب بالـ role في المتصفح
+        if (userRole !== 'doctor' && userRole !== 'patient') {
+            const response = NextResponse.redirect(new URL('/login', request.url));
+            response.cookies.delete('token');
+            response.cookies.delete('role');
+            return response;
         }
 
-        // 🔥 حماية مسارات الدكتور: يلا كان المريض باغي يدخل لصفحات الدكتور
+        // إذا حاول الدخول للصفحات العامة وهو مسجل
+        if (pathname === '/' || pathname === '/login' || pathname === '/register') {
+            return NextResponse.redirect(
+                new URL(userRole === 'doctor' ? '/doctor' : '/dashboard', request.url)
+            );
+        }
+
+        // منع الدكتور من دخول /dashboard الخاصة بالمريض
+        if (pathname === '/dashboard' && userRole === 'doctor') {
+            return NextResponse.redirect(new URL('/doctor', request.url));
+        }
+
+        // منع المريض من دخول مسارات الدكتور
         if (pathname.startsWith('/doctor') && userRole !== 'doctor') {
-        return NextResponse.redirect(new URL('/patient/dashboard', request.url)) // صيفطو لصفحة المريض
-        }
-
-        // 🔥 حماية مسارات المريض: يلا كان الدكتور باغي يدخل لصفحات المريض
-        if (pathname.startsWith('/patient') && userRole !== 'patient') {
-        return NextResponse.redirect(new URL('/doctor/dashboard', request.url)) // صيفطو لصفحة الدكتور
+            return NextResponse.redirect(new URL('/dashboard', request.url));
         }
     }
+
+    return NextResponse.next();
 }
 
-// هنا كيماتشي كاع المسارات اللي بغيتي الميدلوير يخدم عليهم بلا ما يقيس الصور والملفات الثابتة
 export const config = {
-    matcher: ['/doctor/:path*', '/patient/:path*', '/dashboard/:path*', '/login', '/register'],
-}
+    matcher: ['/', '/doctor/:path*', '/dashboard', '/login', '/register'],
+};

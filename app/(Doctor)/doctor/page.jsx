@@ -6,8 +6,7 @@ import Cookies from "js-cookie";
 
 export default function DoctorDashboard() {
 
-  const URL = "https://my-app-backend-qm7ic75no-hapibendaouds-projects.vercel.app/";
-
+const URL = "";
   // 1. إحصائيات سريعة خاصة بالطبيب
   const [stats, setStats] = useState({
     totalPatients: 0,

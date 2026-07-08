@@ -5,58 +5,65 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
 export default function Login() {
-  const URL = "https://my-app-backend-qm7ic75no-hapibendaouds-projects.vercel.app/";
-  const router = useRouter();
+  const URL = "";
+  const router = useRouter(); 
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // زدنا هادي باش المستخدم ما يبقاش يبرك بزاف دالمرات فاش كيتسنى الـ API
 
   const emailRef = useRef(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // كيبدا التحميل
 
-      const patientData = {
+    const patientData = {
       email: email,
       password: password,
-      };
+    };
 
-      try {
-        // 2. كنصيفطو الـ Fetch Request
-        const response = await fetch(`${URL}/api/patients/login`, {
-          method: "POST", 
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${Cookies.get("token")}`, // Assuming you are using cookies for authentication
-            "role": Cookies.get("role"), // Assuming you are storing the role in cookies
-          },
-          body: JSON.stringify(patientData),
-        });
+    try {
+      // صيفطنا الـ Fetch Request (حيّدنا الـ Authorization Headers حيت ما محتاجينهمش فـ اللوكين)
+      const response = await fetch("/api/patients/login", {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(patientData),
+      });
 
-        // 3. قراءة الجواب من السيرفر
-        const res = await response.json();
+      const res = await response.json();
 
-        if (response.ok) {
-          Cookies.set("token", res.token, { expires: 7 });
-          Cookies.set("role", res.role, { expires: 7 });
-          alert(res.message);
+      if (response.ok) {
+        // حفظ التوكن والـ Role فـ الكوكيز
+        Cookies.set("token", res.token, { expires: 7 });
+        Cookies.set("role", res.role, { expires: 7 });
+        
+        alert(res.message || "Logged in successfully!");
 
-          // Reset form fields after submission
-          setEmail("");
-          setPassword("");
-          if(res.role === "patient") {
-            router.push("/dashboard");
-          } else if(res.role === "doctor") {
-            router.push("/doctor");
-          } else {
-            alert("Unknown role. Please contact support.");
-          }
+        // مسح الحقول
+        setEmail("");
+        setPassword("");
+
+        // التوجيه على حسب الـ Role
+        if (res.role === "patient") {
+          router.push("/dashboard");
+        } else if (res.role === "doctor") {
+          router.push("/doctor");
         } else {
-          alert(res.message);
-          emailRef.current.focus();
+          alert("Unknown role. Please contact support.");
         }
-      } catch (error) {
-        console.error(error);
+      } else {
+        alert(res.message || "Login failed");
+        emailRef.current?.focus(); // زدت الـ ? باش نضمنو ما يوقعش Error إلا كان الريف خاوي
       }
+    } catch (error) {
+      console.error("Login Error:", error);
+      alert("Something went wrong. Please try again later.");
+    } finally {
+      setIsLoading(false); // كيسالي التحميل وخا يوقع Error
+    }
   };
 
   return (
@@ -75,6 +82,7 @@ export default function Login() {
               className="w-full dark:text-white border border-gray-300 dark:border-gray-500 dark:bg-gray-700 rounded-lg px-4 py-2.5 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required // كيجبر المستخدم يدخل الايميل قبل ما يصيفط
             />
 
             <input
@@ -83,13 +91,17 @@ export default function Login() {
               className="w-full dark:text-white border border-gray-300 dark:border-gray-500 dark:bg-gray-700 rounded-lg px-4 py-2.5 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required // كيجبر المستخدم يدخل الباسورد
             />
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium transition text-sm sm:text-base"
+              disabled={isLoading} // كيحبس الزر فاش كيكون كيتسنى الجواب
+              className={`w-full text-white py-2.5 rounded-lg font-medium transition text-sm sm:text-base ${
+                isLoading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+              }`}
             >
-              Login
+              {isLoading ? "Loading..." : "Login"}
             </button>
           </form>
 
@@ -103,5 +115,5 @@ export default function Login() {
         </div>
       </section>
     </>
-  );  
-};
+  );
+}
